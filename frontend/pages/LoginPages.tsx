@@ -25,7 +25,7 @@ export default function LoginPages() {
 		if (token) {
 			setAuth(true)
 		}
-	}, [])
+	}, [setAuth])
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		try {
@@ -64,12 +64,12 @@ export default function LoginPages() {
 						<button>
 							{showPassword ? (
 								<MdOutlineMailOutline
-									className="absolute right-50 top-62"
+									className="absolute right-150 top-62"
 									size={30}
 								/>
 							) : (
 								<MdOutlineMailOutline
-									className="absolute right-50 top-62"
+									className="absolute right-167 top-31"
 									size={30}
 								/>
 							)}
@@ -96,7 +96,7 @@ export default function LoginPages() {
 						<button
 							type="button"
 							onClick={() => setShowPassword(!showPassword)}
-							className="absolute left-130 top-79"
+							className="absolute right-167 top-48"
 						>
 							{showPassword ? (
 								<AiOutlineEyeInvisible size={30} />
