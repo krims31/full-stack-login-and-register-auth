@@ -11,7 +11,7 @@ export default function UserPanel() {
 	}
 	return (
 		<>
-			<button onClick={logout} className="border rounded-2xl bg-red w-20 h-10">Logout</button>
+			<button onClick={logout} className="border rounded-2xl bg-red-600 w-20 h-10 text-white absolute left-400">Logout</button>
 		</>
 	)
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { type InternalAxiosRequestConfig } from 'axios'
 import { api } from './authApi'
 
 interface LoginResponse {
@@ -6,16 +7,20 @@ interface LoginResponse {
 	email: string
 }
 
-api.interceptors.request.use(config => {
-	const token = localStorage.getItem('token')
+api.interceptors.request.use(
+	(config: InternalAxiosRequestConfig) => {
+		const token = localStorage.getItem('token')
 
-	if (token) {
-		config.headers = config.headers || {}
-		config.headers.Authorization = `Bearer ${token}`
+		if (token && config.headers) {
+			config.headers.Authorization = `Bearer ${token}`
+		}
+
+		return config
+	},
+	error => {
+		return Promise.reject(error)
 	}
-
-	return config
-})
+)
 
 export async function login(
 	email: string,
