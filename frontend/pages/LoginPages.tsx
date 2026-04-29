@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import { MdOutlineMailOutline } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import type { Inputs } from '../entities/user/types'
-import { useAuthState } from '../features/auth/state'
 import { login } from '../shared/api/axios'
 
 export default function LoginPages() {
@@ -17,14 +16,6 @@ export default function LoginPages() {
 	} = useForm<Inputs>()
 
 	const navigate = useNavigate()
-	const setAuth = useAuthState(state => state.setAuth)
-
-	useEffect(() => {
-		const token = localStorage.getItem('token')
-		if (token) {
-			setAuth(true)
-		}
-	}, [setAuth])
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		try {
@@ -32,8 +23,6 @@ export default function LoginPages() {
 
 			// сохраняем токен
 			localStorage.setItem('token', response.token)
-
-			setAuth(true)
 
 			navigate('/')
 		} catch (error) {

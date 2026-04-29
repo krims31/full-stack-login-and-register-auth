@@ -1,7 +1,11 @@
 import bcrypt from 'bcrypt'
 import cors from 'cors'
 import express, { type Request, type Response } from 'express'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
+
+interface myToken extends JwtPayload {
+	id: number
+}
 
 const app = express()
 
@@ -19,6 +23,27 @@ const user = {
 	email: 'test@mail.ru',
 	password: bcrypt.hashSync('123456', 10)
 }
+
+app.get('/api/auth/me', (req: Request, res: Response) => {
+	const authHeader = req.headers.authorization
+
+	if (!authHeader) {
+		return res.status(401).json({ message: "No token"})
+	}
+
+	const token = authHeader.split(' ')[1]
+
+	try {
+		const decoded = jwt.verify(token, 'secret') as myToken
+
+		res.json({
+			id: decoded.id,
+			email: user.email
+		})
+	} catch {
+		res.status(401).json({ message: 'Invalid token' })
+	}
+})
 
 app.post('/api/auth/login', async (req: Request, res: Response) => {
 	const { email, password } = req.body
