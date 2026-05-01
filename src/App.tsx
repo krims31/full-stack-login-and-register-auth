@@ -12,6 +12,9 @@ function App() {
 	if (isLoading) {
 		return <div>Loading...</div>
 	}
+	
+	console.log('Current API URL:', import.meta.env.VITE_API_URL);
+
 
 	return (
 		<>
