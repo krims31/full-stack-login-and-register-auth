@@ -9,10 +9,8 @@ import {
 	MessageCircle,
 	Settings
 } from 'lucide-react'
-import useLogout from '../../../../features/hooks/useLogout'
 import UserMenu from '../../../../shared/lib/ui/UserMenu'
 export default function Sidebar() {
-	const { logout } = useLogout()
 	return (
 		<>
 			<aside>
