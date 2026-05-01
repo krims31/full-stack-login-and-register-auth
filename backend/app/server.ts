@@ -15,10 +15,13 @@ app.use(express.json())
 
 app.use(
 	cors({
-		origin: ['http://localhost:5173', 'https://full-stack-ai-p7ym.vercel.app'],
+		origin: ['http://localhost:5173', 'https://full-stack-ai-tau.vercel.app'],
+		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 		credentials: true
 	})
 )
+
+app.options
 
 const user = {
 	id: 1,
