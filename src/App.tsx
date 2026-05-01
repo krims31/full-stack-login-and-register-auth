@@ -10,11 +10,14 @@ function App() {
 	const { isLoading } = useAuth()
 
 	if (isLoading) {
-		return <div>Loading...</div>
+		return (
+			<div className="h-screen flex items-center justify-center text-xl">
+				Waking up server...
+			</div>
+		)
 	}
-	
-	console.log('Current API URL:', import.meta.env.VITE_API_URL);
 
+	console.log('Current API URL:', import.meta.env.VITE_API_URL)
 
 	return (
 		<>
