@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import { MdOutlineMailOutline } from 'react-icons/md'
@@ -14,6 +14,10 @@ export default function LoginPages() {
 		handleSubmit,
 		formState: { errors }
 	} = useForm<Inputs>()
+
+	useEffect(() => {
+		console.log('API URL:', import.meta.env.VITE_API_URL)
+	}, [])
 
 	const navigate = useNavigate()
 
