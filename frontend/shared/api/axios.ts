@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { type InternalAxiosRequestConfig } from 'axios'
+import axios, { type InternalAxiosRequestConfig } from 'axios'
 import { api } from './authApi'
 
 interface LoginResponse {
@@ -31,6 +30,9 @@ export async function login(
 			email,
 			password
 		})
+
+		localStorage.setItem('token', data.token)
+
 		return data
 	} catch (error: unknown) {
 		if (axios.isAxiosError(error)) {
