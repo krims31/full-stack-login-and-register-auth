@@ -2,10 +2,14 @@ import { create } from 'zustand'
 
 type AuthState = {
 	isAuth: boolean
+	isLoading: boolean
 	setAuth: (value: boolean) => void
+	setLoading: (value: boolean) => void
 }
 
 export const useAuthState = create<AuthState>(set => ({
 	isAuth: false,
-	setAuth: value => set({ isAuth: value })
+	isLoading: true,
+	setAuth: value => set({ isAuth: value }),
+	setLoading: value => set({ isLoading: value })
 }))

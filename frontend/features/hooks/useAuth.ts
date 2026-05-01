@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { api } from '../../shared/api/authApi'
 import { useAuthState } from '../auth/state'
 
 export default function useAuth() {
 	const isAuth = useAuthState(state => state.isAuth)
 	const setAuth = useAuthState(state => state.setAuth)
-
-	const [isLoading, setIsLoading] = useState(true)
+	const setLoading = useAuthState(state => state.setLoading)
 
 	useEffect(() => {
 		const checkAuth = async () => {
@@ -14,7 +13,7 @@ export default function useAuth() {
 
 			if (!token) {
 				setAuth(false)
-				setIsLoading(false)
+				setLoading(false)
 				return
 			}
 			try {
@@ -24,14 +23,13 @@ export default function useAuth() {
 			} catch {
 				setAuth(false)
 			} finally {
-				setIsLoading(false)
+				setLoading(false)
 			}
 		}
 		checkAuth()
 	}, [setAuth])
 
 	return {
-		isAuth,
-		isLoading
+		isAuth
 	}
 }

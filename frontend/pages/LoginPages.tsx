@@ -4,10 +4,13 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import { MdOutlineMailOutline } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import type { Inputs } from '../entities/user/types'
+import { useAuthState } from '../features/auth/state'
 import { login } from '../shared/api/axios'
 
 export default function LoginPages() {
 	const [showPassword, setShowPassword] = useState(false)
+
+	const setAuth = useAuthState(state => state.setAuth)
 
 	const {
 		register,
@@ -27,6 +30,8 @@ export default function LoginPages() {
 
 			// сохраняем токен
 			localStorage.setItem('token', response.token)
+
+			setAuth(true)
 
 			navigate('/')
 		} catch (error) {

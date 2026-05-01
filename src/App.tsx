@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ProtectedRoutes } from '../frontend/app/providers/routes/ProtectedRoutes'
 import useAuth from '../frontend/features/hooks/useAuth'
 import Ai from '../frontend/pages/AI'
