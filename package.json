@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite",
 		"lint": "eslint .",
-		"build": "tsc -p backend/tsconfig.server.json",
+		"build": "tsc -p backend/tsconfig.json",
 		"start": "node backend/dist/server.js",
 		"preview": "vite preview"
 	},
