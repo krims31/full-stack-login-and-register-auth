@@ -21,7 +21,7 @@ app.use(
 	})
 )
 
-app.options
+app.options('*', cors())
 
 const user = {
 	id: 1,

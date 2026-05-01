@@ -9,20 +9,12 @@ import {
 	UserRoundPlus
 } from 'lucide-react'
 import { useState } from 'react'
-import useLogout from '../features/hooks/useLogout'
 
 export default function Ai() {
 	const [enabled, setEnabled] = useState(false)
-	const { logout } = useLogout()
 	return (
 		<>
-			<button
-				onClick={logout}
-				className="border rounded-2xl bg-red-600 w-20 h-10 text-white absolute left-400"
-			>
-				Logout
-			</button>
-			<header className="flex items-center justify-between px-30 py-4">
+			<header className="flex items-center justify-between px-20 py-4 text-black">
 				<div className="flex items-center gap-4">
 					<select
 						className="border rounded-md px-7 py-1 transition-shadow
