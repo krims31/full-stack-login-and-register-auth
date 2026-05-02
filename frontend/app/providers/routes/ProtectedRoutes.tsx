@@ -10,8 +10,10 @@ export const ProtectedRoutes = ({ children }: Props) => {
 	const isLoading = useAuthState(state => state.isLoading)
 
 	if (isLoading) {
-		return <div>Loading...</div>
+		return <div className="flex items-center justify-center">Loading...</div>
 	}
+
+	console.log({ isAuth, isLoading })
 
 	if (!isAuth) {
 		return <Navigate to="/login" />

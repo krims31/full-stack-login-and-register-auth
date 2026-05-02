@@ -14,11 +14,16 @@ export default function Sidebar() {
 	return (
 		<>
 			<aside>
+				<img
+					src="./ai-icon-circle-png.webp"
+					alt="ai"
+					className="flex items-center justify-center absolute top-3 left-2 w-10 h-10"
+				/>
 				<div
 					className="border rounded-2xl absolute -top-2 right-407 w-15 h-208 transition-shadow
              border-black/10 shadow-lg hover:shadow-xl outline-0"
 				>
-					<div className="flex flex-col items-center gap-4 mt-20 ml-2">
+					<div className="flex flex-col items-center gap-4 mt-20 mr-1">
 						{[
 							House,
 							MessageCircle,
@@ -43,7 +48,7 @@ export default function Sidebar() {
 						))}
 					</div>
 
-					<div className="flex flex-col items-center mt-60 gap-4 ml-2">
+					<div className="flex flex-col items-center mt-60 gap-4 mr-1">
 						{[Headphones, Settings].map((Icon, index) => (
 							<div
 								key={index}

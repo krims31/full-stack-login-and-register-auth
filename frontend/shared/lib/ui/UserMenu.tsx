@@ -30,7 +30,7 @@ export default function UserMenu() {
 					onClick={() => setIsOpen(prev => !prev)}
 					className="cursor-pointer"
 				>
-					<CircleUserRound size={40} />
+					<CircleUserRound size={30} />
 				</div>
 
 				{isOpen && (
