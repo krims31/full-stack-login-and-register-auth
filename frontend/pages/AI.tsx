@@ -12,173 +12,148 @@ import { useState } from 'react'
 
 export default function Ai() {
 	const [enabled, setEnabled] = useState(false)
+
 	return (
-		<div className="min-h-screen max-w-360 mx-auto overflow-x-hidden">
-			<header className="flex items-center justify-between px-20 py-4 text-black">
+		<div className="min-h-screen max-w-360 mx-auto overflow-x-hidden px-4">
+			{/* HEADER */}
+			<header className="flex items-center justify-between px-4 xl:px-20 py-4 text-black">
 				<div className="flex items-center gap-4">
 					<select
-						className="border rounded-md px-7 py-1 transition-shadow
+						className="border rounded-md px-6 py-1 transition-shadow
              border-black/10 shadow-lg hover:shadow-xl outline-0"
 					>
 						<option>ChatGPT 4o</option>
 						<option>Claude Code</option>
 						<option>Deepseek</option>
 					</select>
+
 					<img
 						src="./ai.png"
 						alt="ai"
-						className="w-4 -ml-42"
+						className="w-4 -ml-40"
 					/>
 				</div>
 
-				<div className="flex items-center gap-3">
-					<button
-						className="flex items-center gap-2 border rounded-md px-3 py-1 transition-shadow
-             border-black/10 shadow-lg hover:shadow-xl outline-0"
-					>
-						<Search
-							size={16}
-							className="text-black"
-						/>
-						<span>Search thread</span>
+				<div className="flex items-center gap-2 xl:gap-3">
+					<button className="flex items-center gap-2 border rounded-md px-2 xl:px-3 py-1 transition-shadow border-black/10 shadow-lg hover:shadow-xl">
+						<Search size={16} />
+						<span className="hidden xl:inline">Search thread</span>
 					</button>
 
-					<button
-						className="flex items-center gap-2 border rounded-md px-3 py-1 transition-shadow
-             border-black/10 shadow-lg hover:shadow-xl outline-0"
-					>
-						<UserRoundPlus
-							size={16}
-							className="text-black"
-						/>
-						<span>Invite</span>
+					<button className="flex items-center gap-2 border rounded-md px-2 xl:px-3 py-1 transition-shadow border-black/10 shadow-lg hover:shadow-xl">
+						<UserRoundPlus size={16} />
+						<span className="hidden xl:inline">Invite</span>
 					</button>
 
-					<button
-						className="flex items-center gap-2 bg-black text-white rounded-md px-3 py-1 transition-shadow
-             border-black/10 shadow-lg hover:shadow-xl outline-0"
-					>
+					<button className="flex items-center gap-2 bg-black text-white rounded-md px-2 xl:px-3 py-1 transition-shadow shadow-lg hover:shadow-xl">
 						<Plus size={16} />
 						<span>New Thread</span>
 					</button>
 				</div>
 			</header>
 
-			<main>
-				<div>
-					<img
-						src="./purple-ball-png-3d-geometric-shape-transparent-background_53876-977295.jpg"
-						alt="purple-circle"
-						className="w-25 h-25 flex item-center justify-center absolute top-20 left-200 animate-spin max-2xl:top-20 max-2xl:left-150"
-					/>
-					<h1 className="ml-150 mt-30 text-5xl text-black font-bold leading-tight xl:mt-40 xl:ml-100 2xl:ml-120">
-						Good Afternoon, Krims <br />
-						<span className="ml-3 text-gray-800">
-							What's on{' '}
-							<span className="bg-linear-to-r from-purple-400 to-purple-700 bg-clip-text text-transparent">
-								your mind?
-							</span>
+			{/* MAIN */}
+			<main className="relative flex flex-col items-center text-center mt-20">
+				<img
+					src="./purple-ball-png-3d-geometric-shape-transparent-background_53876-977295.jpg"
+					alt="purple-circle"
+					className="w-20 h-20 animate-spin mb-6"
+				/>
+
+				<h1 className="text-3xl xl:text-5xl text-black font-bold leading-tight">
+					Good Afternoon, Krims <br />
+					<span className="text-gray-800">
+						What's on{' '}
+						<span className="bg-linear-to-r from-purple-400 to-purple-700 bg-clip-text text-transparent">
+							your mind?
 						</span>
-					</h1>
-					<div>
-						<input
-							type="text"
-							id="user-input"
-							className="mt-15 ml-110 w-193 h-40 pb-27 pl-10 border rounded-2xl placeholder:text-gray-600 transition-shadow
-             border-black/10 shadow-lg hover:shadow-xl outline-0 xl:mt-10 xl:ml-70 2xl:ml-85"
-							placeholder="Ask AI a question or make a request..."
-						/>
-						<button
-							className="border rounded-md relative -top-11 ml-112 w-20 h-8 text-black transition-shadow flex item-center pl-6 pt-0.5 
-             border-black/10 shadow-lg hover:shadow-xl xl:mt-0 xl:ml-72 2xl:ml-87"
-						>
-							<Paperclip
-								size={15}
-								className="absolute top-2 left-1"
+					</span>
+				</h1>
+
+				{/* INPUT */}
+				<div className="w-full flex flex-col items-center mt-10">
+					<input
+						type="text"
+						className="w-full max-w-2xl h-32 px-8 pt-1 pb-20 border rounded-2xl placeholder:text-gray-600 transition-shadow border-black/10 shadow-lg hover:shadow-xl outline-0"
+						placeholder="Ask AI a question or make a request..."
+					/>
+
+					{/* Attach */}
+					<button className="relative -mt-12 mr-auto border rounded-md px-2 xl:px-3 py-1 transition-shadow border-black/10 shadow-lg hover:shadow-xl xl:ml-75 2xl:ml-95 lg:ml-50 flex items-center gap-1 text-black max-[1280px]:ml-40">
+						<Paperclip size={15} />
+						Attach
+					</button>
+
+					{/* OPTIONS */}
+					<div className="flex flex-wrap justify-center items-center gap-4 -mt-8">
+						<select className="border rounded-md px-3 py-1 xl:px-3 transition-shadow border-black/10 shadow-lg hover:shadow-xl mr-50 2xl:ml-30">
+							<option>Writing Styles</option>
+						</select>
+
+						<label className="flex items-center gap-2 cursor-pointer">
+							<input
+								type="checkbox"
+								className="sr-only"
+								checked={enabled}
+								onChange={() => setEnabled(!enabled)}
 							/>
-							Attach
-						</button>
-						<label>
-							<select
-								className="relative z-10 border rounded-md -mt-19 ml-135 w-30 h-8 flex text-center text-black transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl xl:-mt-19 xl:ml-95 2xl:ml-110"
-							>
-								<option value="1">Writing Styles</option>
-							</select>
-						</label>
-						<div className="flex items-center gap-2 xl:mt-0 xl:-ml-40">
-							<label className="relative inline-flex items-center cursor-pointer -mt-8 ml-260 2xl:ml-275">
-								<input
-									type="checkbox"
-									className="sr-only peer"
-									checked={enabled}
-									onChange={() => setEnabled(!enabled)}
+							<div className="w-11 h-6 bg-gray-200 rounded-full relative 2xl:mr-0 xl:ml-0">
+								<div
+									className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition ${
+										enabled ? 'translate-x-5 bg-blue-500' : ''
+									}`}
 								/>
-								<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-								<span className="ml-3 text-sm font-medium text-gray-900">
-									Citation
-								</span>
-							</label>
-						</div>
-						<button
-							className="border bg-black rounded-md w-8 h-8 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl text-white relative z-10 -top-8 ml-290 xl:mt-0 xl:ml-250 2xl:ml-265"
-						>
-							↑
-						</button>
+							</div>
+							<span className="text-sm">Citation</span>
+						</label>
 					</div>
+
+					{/* SEND */}
+					<button className="bg-black text-white w-8 h-8 rounded-md mt-4 2xl:ml-155 2xl:-mt-7 xl:ml-150 xl:-mt-7">
+						↑
+					</button>
 				</div>
 			</main>
 
-			<footer>
-				<div>
-					<p className="transform uppercase text-black font-mono mt-5 ml-110 xl:mt-0 xl:ml-72 2xl:ml-85">
-						Get started with an example below
-					</p>
-				</div>
-				<div
-					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl mt-5 ml-110 xl:mt-5 xl:ml-72 2xl:ml-85"
-				>
-					<p className="mt-1 ml-3">
-						Write a to-do list for a <br /> personal project
-						<User className="text-black mt-10" />
-					</p>
-				</div>
-				<div
-					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-160 xl:-mt-30 xl:ml-120 2xl:ml-135"
-				>
-					<p className="mt-1 ml-3">
-						Generate an email to <br /> reply to a job offer
-						<Mail className="text-black mt-10" />
-					</p>
-				</div>
-				<div
-					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-210 xl:-mt-30 xl:ml-170 2xl:ml-185"
-				>
-					<p className="mt-1 ml-3">
-						Summarize this article <br /> in one paragraph
-						<MessageCircle className="text-black mt-10" />
-					</p>
-				</div>
-				<div
-					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-260 xl:-mt-30 xl:ml-220 2xl:ml-235"
-				>
-					<p className="mt-1 ml-3">
-						How does AI work in a <br /> technical capacity
-						<Code className="text-black mt-10" />
-					</p>
+			{/* FOOTER */}
+			<footer className="mt-16">
+				<p className="uppercase text-black font-mono text-center mb-6 2xl:mr-80 2xl:-mt-5 2xl:-ml-2 xl:-ml-85 xl:-mt-5">
+					Get started with an example below
+				</p>
+
+				<div className="grid grid-cols-1 xl:w-200 xl:ml-50 2xl:w-200 sm:grid-cols-2 xl:grid-cols-4 gap-4 2xl:ml-70">
+					<Card
+						text="Write a to-do list for a personal project"
+						icon={<User />}
+					/>
+					<Card
+						text="Generate an email to reply to a job offer"
+						icon={<Mail />}
+					/>
+					<Card
+						text="Summarize this article in one paragraph"
+						icon={<MessageCircle />}
+					/>
+					<Card
+						text="How does AI work in a technical capacity"
+						icon={<Code />}
+					/>
 				</div>
 				<img
-					src="ai-black.png"
+					src="./ai-black.png"
 					alt="ai-black"
-					width={20}
-					className="-mt-86 ml-113 xl:-mt-81 xl:ml-73 2xl:ml-88"
+					className="2xl:-mt-75 2xl:ml-94 2xl:w-4 xl:w-4 xl:-mt-75 xl:ml-74"
 				/>
 			</footer>
+		</div>
+	)
+}
+
+function Card({ text, icon }: { text: string; icon: React.ReactNode }) {
+	return (
+		<div className="border rounded-md bg-gray-100 p-4 transition-shadow border-black/10 shadow-lg hover:shadow-xl h-28 flex flex-col justify-between">
+			<p>{text}</p>
+			<div>{icon}</div>
 		</div>
 	)
 }
