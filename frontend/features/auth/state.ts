@@ -10,6 +10,6 @@ interface AuthState {
 export const useAuthState = create<AuthState>(set => ({
 	isAuth: false,
 	isLoading: true,
-	setAuth: value => set({ isAuth: value }),
+	setAuth: value => set({ isAuth: value, isLoading: false }),
 	setLoading: value => set({ isLoading: value })
 }))

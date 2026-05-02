@@ -10,7 +10,11 @@ export const ProtectedRoutes = ({ children }: Props) => {
 	const isLoading = useAuthState(state => state.isLoading)
 
 	if (isLoading) {
-		return <div className="flex items-center justify-center">Loading...</div>
+		return (
+			<div className="flex items-center justify-center absolute top-90 left-185 text-5xl">
+				Loading...
+			</div>
+		)
 	}
 
 	console.log({ isAuth, isLoading })

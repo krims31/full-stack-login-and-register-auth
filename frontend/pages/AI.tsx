@@ -66,6 +66,11 @@ export default function Ai() {
 
 			<main>
 				<div>
+					<img
+						src="./purple-ball-png-3d-geometric-shape-transparent-background_53876-977295.jpg"
+						alt="purple-circle"
+						className="w-25 h-25 flex item-center justify-center absolute top-15 left-200 animate-spin"
+					/>
 					<h1 className="ml-150 mt-30 text-5xl text-black">
 						Good Afternoon, Krims <br />
 						<span className="ml-3">
