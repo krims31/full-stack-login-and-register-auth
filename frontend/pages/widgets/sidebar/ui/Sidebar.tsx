@@ -21,7 +21,7 @@ export default function Sidebar() {
 				/>
 				<div
 					className="border rounded-2xl absolute -top-2 right-407 w-15 h-208 transition-shadow
-             border-black/10 shadow-lg hover:shadow-xl outline-0"
+             border-black/10 shadow-lg hover:shadow-xl outline-0  max-2xl:right-auto max-2xl:left-0"
 				>
 					<div className="flex flex-col items-center gap-4 mt-20 mr-1">
 						{[

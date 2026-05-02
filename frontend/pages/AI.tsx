@@ -13,7 +13,7 @@ import { useState } from 'react'
 export default function Ai() {
 	const [enabled, setEnabled] = useState(false)
 	return (
-		<>
+		<div className="min-h-screen max-w-360 mx-auto overflow-x-hidden">
 			<header className="flex items-center justify-between px-20 py-4 text-black">
 				<div className="flex items-center gap-4">
 					<select
@@ -69,9 +69,9 @@ export default function Ai() {
 					<img
 						src="./purple-ball-png-3d-geometric-shape-transparent-background_53876-977295.jpg"
 						alt="purple-circle"
-						className="w-25 h-25 flex item-center justify-center absolute top-15 left-200 animate-spin"
+						className="w-25 h-25 flex item-center justify-center absolute top-20 left-200 animate-spin max-2xl:top-20 max-2xl:left-150"
 					/>
-					<h1 className="ml-150 mt-30 text-5xl text-black font-bold leading-tight">
+					<h1 className="ml-150 mt-30 text-5xl text-black font-bold leading-tight xl:mt-40 xl:ml-100 2xl:ml-120">
 						Good Afternoon, Krims <br />
 						<span className="ml-3 text-gray-800">
 							What's on{' '}
@@ -85,12 +85,12 @@ export default function Ai() {
 							type="text"
 							id="user-input"
 							className="mt-15 ml-110 w-193 h-40 pb-27 pl-10 border rounded-2xl placeholder:text-gray-600 transition-shadow
-             border-black/10 shadow-lg hover:shadow-xl outline-0"
+             border-black/10 shadow-lg hover:shadow-xl outline-0 xl:mt-10 xl:ml-70 2xl:ml-85"
 							placeholder="Ask AI a question or make a request..."
 						/>
 						<button
 							className="border rounded-md relative -top-11 ml-112 w-20 h-8 text-black transition-shadow flex item-center pl-6 pt-0.5 
-             border-black/10 shadow-lg hover:shadow-xl"
+             border-black/10 shadow-lg hover:shadow-xl xl:mt-0 xl:ml-72 2xl:ml-87"
 						>
 							<Paperclip
 								size={15}
@@ -101,13 +101,13 @@ export default function Ai() {
 						<label>
 							<select
 								className="relative z-10 border rounded-md -mt-19 ml-135 w-30 h-8 flex text-center text-black transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl"
+             border-black/10 shadow-lg hover:shadow-xl xl:-mt-19 xl:ml-95 2xl:ml-110"
 							>
 								<option value="1">Writing Styles</option>
 							</select>
 						</label>
-						<div className="flex items-center gap-2">
-							<label className="relative inline-flex items-center cursor-pointer -mt-8 ml-260">
+						<div className="flex items-center gap-2 xl:mt-0 xl:-ml-40">
+							<label className="relative inline-flex items-center cursor-pointer -mt-8 ml-260 2xl:ml-275">
 								<input
 									type="checkbox"
 									className="sr-only peer"
@@ -122,7 +122,7 @@ export default function Ai() {
 						</div>
 						<button
 							className="border bg-black rounded-md w-8 h-8 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl text-white relative z-10 -top-8 ml-290"
+             border-black/10 shadow-lg hover:shadow-xl text-white relative z-10 -top-8 ml-290 xl:mt-0 xl:ml-250 2xl:ml-265"
 						>
 							↑
 						</button>
@@ -132,13 +132,13 @@ export default function Ai() {
 
 			<footer>
 				<div>
-					<p className="transform uppercase text-black font-mono mt-5 ml-110">
+					<p className="transform uppercase text-black font-mono mt-5 ml-110 xl:mt-0 xl:ml-72 2xl:ml-85">
 						Get started with an example below
 					</p>
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl mt-5 ml-110"
+             border-black/10 shadow-lg hover:shadow-xl mt-5 ml-110 xl:mt-5 xl:ml-72 2xl:ml-85"
 				>
 					<p className="mt-1 ml-3">
 						Write a to-do list for a <br /> personal project
@@ -147,7 +147,7 @@ export default function Ai() {
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-160"
+             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-160 xl:-mt-30 xl:ml-120 2xl:ml-135"
 				>
 					<p className="mt-1 ml-3">
 						Generate an email to <br /> reply to a job offer
@@ -156,7 +156,7 @@ export default function Ai() {
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-210"
+             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-210 xl:-mt-30 xl:ml-170 2xl:ml-185"
 				>
 					<p className="mt-1 ml-3">
 						Summarize this article <br /> in one paragraph
@@ -165,7 +165,7 @@ export default function Ai() {
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-260"
+             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-260 xl:-mt-30 xl:ml-220 2xl:ml-235"
 				>
 					<p className="mt-1 ml-3">
 						How does AI work in a <br /> technical capacity
@@ -176,9 +176,9 @@ export default function Ai() {
 					src="ai-black.png"
 					alt="ai-black"
 					width={20}
-					className="-mt-86 ml-113"
+					className="-mt-86 ml-113 xl:-mt-81 xl:ml-73 2xl:ml-88"
 				/>
 			</footer>
-		</>
+		</div>
 	)
 }
