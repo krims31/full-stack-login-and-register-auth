@@ -84,12 +84,12 @@ export default function Ai() {
 						<input
 							type="text"
 							id="user-input"
-							className="mt-15 ml-103 w-193 h-40 pb-27 pl-10 border rounded-2xl placeholder:text-gray-600 transition-shadow
+							className="mt-15 ml-110 w-193 h-40 pb-27 pl-10 border rounded-2xl placeholder:text-gray-600 transition-shadow
              border-black/10 shadow-lg hover:shadow-xl outline-0"
 							placeholder="Ask AI a question or make a request..."
 						/>
 						<button
-							className="border rounded-md relative -top-11 ml-108 w-20 h-8 text-black transition-shadow flex item-center pl-6 pt-0.5 
+							className="border rounded-md relative -top-11 ml-112 w-20 h-8 text-black transition-shadow flex item-center pl-6 pt-0.5 
              border-black/10 shadow-lg hover:shadow-xl"
 						>
 							<Paperclip
@@ -100,14 +100,14 @@ export default function Ai() {
 						</button>
 						<label>
 							<select
-								className="relative z-10 border rounded-md -mt-19 ml-132 w-30 h-8 flex text-center text-black transition-shadow 
+								className="relative z-10 border rounded-md -mt-19 ml-135 w-30 h-8 flex text-center text-black transition-shadow 
              border-black/10 shadow-lg hover:shadow-xl"
 							>
 								<option value="1">Writing Styles</option>
 							</select>
 						</label>
 						<div className="flex items-center gap-2">
-							<label className="relative inline-flex items-center cursor-pointer -mt-8 ml-255">
+							<label className="relative inline-flex items-center cursor-pointer -mt-8 ml-260">
 								<input
 									type="checkbox"
 									className="sr-only peer"
@@ -122,7 +122,7 @@ export default function Ai() {
 						</div>
 						<button
 							className="border bg-black rounded-md w-8 h-8 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl text-white relative z-10 -top-8 ml-284"
+             border-black/10 shadow-lg hover:shadow-xl text-white relative z-10 -top-8 ml-290"
 						>
 							↑
 						</button>
@@ -132,13 +132,13 @@ export default function Ai() {
 
 			<footer>
 				<div>
-					<p className="transform uppercase text-black font-mono mt-5 ml-105">
+					<p className="transform uppercase text-black font-mono mt-5 ml-110">
 						Get started with an example below
 					</p>
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl mt-5 ml-105"
+             border-black/10 shadow-lg hover:shadow-xl mt-5 ml-110"
 				>
 					<p className="mt-1 ml-3">
 						Write a to-do list for a <br /> personal project
@@ -147,7 +147,7 @@ export default function Ai() {
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-155"
+             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-160"
 				>
 					<p className="mt-1 ml-3">
 						Generate an email to <br /> reply to a job offer
@@ -156,7 +156,7 @@ export default function Ai() {
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-205"
+             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-210"
 				>
 					<p className="mt-1 ml-3">
 						Summarize this article <br /> in one paragraph
@@ -165,7 +165,7 @@ export default function Ai() {
 				</div>
 				<div
 					className="border rounded-md bg-gray-100 w-42 h-30 transition-shadow 
-             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-255"
+             border-black/10 shadow-lg hover:shadow-xl -mt-30 ml-260"
 				>
 					<p className="mt-1 ml-3">
 						How does AI work in a <br /> technical capacity
@@ -176,7 +176,7 @@ export default function Ai() {
 					src="ai-black.png"
 					alt="ai-black"
 					width={20}
-					className="-mt-86 ml-106"
+					className="-mt-86 ml-113"
 				/>
 			</footer>
 		</>
