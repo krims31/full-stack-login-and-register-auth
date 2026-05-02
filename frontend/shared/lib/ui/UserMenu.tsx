@@ -34,12 +34,16 @@ export default function UserMenu() {
 				</div>
 
 				{isOpen && (
-					<div className="absolute left-10 -mt-20 w-40 bg-white shadow-lg rounded-xl p-2 border">
+					<div className="absolute left-10 -mt-20 w-40 bg-white rounded-xl p-2 border  border-black/10 shadow-lg hover:shadow-xl outline-0">
 						<button
-							className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg"
+							className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg text-red-500"
 							onClick={handleLogin}
 						>
 							Logout
+						</button>
+
+						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+							Theme
 						</button>
 					</div>
 				)}

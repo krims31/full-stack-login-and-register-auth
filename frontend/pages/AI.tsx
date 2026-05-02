@@ -13,6 +13,12 @@ import { useState } from 'react'
 export default function Ai() {
 	const [enabled, setEnabled] = useState(false)
 
+	const handleSend = () => {
+		setEnabled(prev => !prev)
+
+		console.log('enabled', enabled)
+	}
+
 	return (
 		<div className="min-h-screen max-w-360 mx-auto overflow-x-hidden px-4">
 			{/* HEADER */}
@@ -97,19 +103,27 @@ export default function Ai() {
 								checked={enabled}
 								onChange={() => setEnabled(!enabled)}
 							/>
-							<div className="w-11 h-6 bg-gray-200 rounded-full relative 2xl:mr-0 xl:ml-0">
+							<div
+								className={`w-11 h-6 rounded-full relative 2xl:mr-0 xl:ml-0 transition-colors duration-200 ease-in-out ${
+									enabled ? 'bg-violet-600' : 'bg-gray-300'
+								}`}
+							>
 								<div
-									className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition ${
-										enabled ? 'translate-x-5 bg-blue-500' : ''
+									className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out ${
+										enabled ? 'translate-x-5' : ''
 									}`}
 								/>
 							</div>
+
 							<span className="text-sm">Citation</span>
 						</label>
 					</div>
 
 					{/* SEND */}
-					<button className="bg-black text-white w-8 h-8 rounded-md mt-4 2xl:ml-155 2xl:-mt-7 xl:ml-150 xl:-mt-7">
+					<button
+						onKeyDown={event => event.key === 'Enter' && handleSend()}
+						className="bg-black text-white w-8 h-8 rounded-md mt-4 2xl:ml-155 2xl:-mt-7 xl:ml-150 xl:-mt-7"
+					>
 						↑
 					</button>
 				</div>
