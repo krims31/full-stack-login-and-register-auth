@@ -31,12 +31,12 @@ export default function Sidebar() {
 							<div
 								key={index}
 								className="
-        relative px-4 py-2 cursor-pointer group
-        before:absolute before:left-0 before:top-0 before:bottom-0 
-        before:w-1 before:bg-purple-500 
-        before:transform before:scale-y-0 before:transition-transform before:duration-300
-        hover:before:scale-y-100
-      "
+        					relative px-4 py-2 cursor-pointer group
+        					before:absolute before:left-0 before:top-0 before:bottom-0 
+        					before:w-1 before:bg-purple-500 
+        					before:transform before:scale-y-0 before:transition-transform before:duration-300
+        					hover:before:scale-y-100
+      					"
 							>
 								<Icon className="text-gray-400 group-hover:text-purple-500 transition-colors" />
 							</div>
@@ -47,11 +47,12 @@ export default function Sidebar() {
 						{[Headphones, Settings].map((Icon, index) => (
 							<div
 								key={index}
-								className="relative px-4 py-2 cursor-pointer group
-        before:absolute before:left-0 before:top-0 before:bottom-0 
-        before:w-1 before:bg-purple-500 
-        before:transform before:scale-y-0 before:transition-transform before:duration-300
-        hover:before:scale-y-100"
+								className="
+									relative px-4 py-2 cursor-pointer group
+        					before:absolute before:left-0 before:top-0 before:bottom-0 
+        					before:w-1 before:bg-purple-500 
+        					before:transform before:scale-y-0 before:transition-transform before:duration-300
+        					hover:before:scale-y-100"
 							>
 								<Icon className="text-gray-400 group-hover:text-purple-500 transition-colors" />
 							</div>
