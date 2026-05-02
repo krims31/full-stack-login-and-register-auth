@@ -92,7 +92,7 @@ export default function Ai() {
 
 					{/* OPTIONS */}
 					<div className="flex flex-wrap justify-center items-center gap-4 -mt-8">
-						<select className="border rounded-md px-3 py-1 xl:px-3 transition-shadow border-black/10 shadow-lg hover:shadow-xl mr-50 2xl:ml-30">
+						<select className="border rounded-md px-3 py-1 xl:px-3 transition-shadow border-black/10 shadow-lg hover:shadow-xl mr-50 2xl:ml-30 text-black">
 							<option>Writing Styles</option>
 						</select>
 
@@ -138,19 +138,19 @@ export default function Ai() {
 				<div className="grid grid-cols-1 xl:w-200 xl:ml-50 2xl:w-200 sm:grid-cols-2 xl:grid-cols-4 gap-4 2xl:ml-70">
 					<Card
 						text="Write a to-do list for a personal project"
-						icon={<User />}
+						icon={<User className="text-black" />}
 					/>
 					<Card
 						text="Generate an email to reply to a job offer"
-						icon={<Mail />}
+						icon={<Mail className="text-black" />}
 					/>
 					<Card
 						text="Summarize this article in one paragraph"
-						icon={<MessageCircle />}
+						icon={<MessageCircle className="text-black" />}
 					/>
 					<Card
 						text="How does AI work in a technical capacity"
-						icon={<Code />}
+						icon={<Code className="text-black" />}
 					/>
 				</div>
 				<img
