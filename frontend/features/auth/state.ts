@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type AuthState = {
+interface AuthState {
 	isAuth: boolean
 	isLoading: boolean
 	setAuth: (value: boolean) => void

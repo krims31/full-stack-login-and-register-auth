@@ -11,8 +11,6 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-app.use(express.json())
-
 app.use(
 	cors({
 		origin: ['http://localhost:5173', 'https://full-stack-ai-tau.vercel.app'],
@@ -21,6 +19,8 @@ app.use(
 		credentials: true
 	})
 )
+
+app.use(express.json())
 
 const user = {
 	id: 1,
@@ -72,7 +72,7 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 	})
 })
 
-app.all('/{*:splat}', (req: Request, res: Response) => {
+app.all('/*splat', (req: Request, res: Response) => {
 	res.status(404).json({
 		message: `The URL ${req.originalUrl} doesn't exist`
 	})
