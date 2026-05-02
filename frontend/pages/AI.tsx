@@ -71,9 +71,9 @@ export default function Ai() {
 						alt="purple-circle"
 						className="w-25 h-25 flex item-center justify-center absolute top-15 left-200 animate-spin"
 					/>
-					<h1 className="ml-150 mt-30 text-5xl text-black">
+					<h1 className="ml-150 mt-30 text-5xl text-black font-bold leading-tight">
 						Good Afternoon, Krims <br />
-						<span className="ml-3">
+						<span className="ml-3 text-gray-800">
 							What's on{' '}
 							<span className="bg-linear-to-r from-purple-400 to-purple-700 bg-clip-text text-transparent">
 								your mind?
