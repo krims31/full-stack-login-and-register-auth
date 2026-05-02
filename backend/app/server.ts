@@ -17,11 +17,10 @@ app.use(
 	cors({
 		origin: ['http://localhost:5173', 'https://full-stack-ai-tau.vercel.app'],
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true
 	})
 )
-
-app.options('*', cors())
 
 const user = {
 	id: 1,
@@ -70,6 +69,12 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 	res.json({
 		token,
 		email: user.email
+	})
+})
+
+app.all('/{*:splat}', (req: Request, res: Response) => {
+	res.status(404).json({
+		message: `The URL ${req.originalUrl} doesn't exist`
 	})
 })
 
