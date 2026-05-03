@@ -34,16 +34,34 @@ export default function UserMenu() {
 				</div>
 
 				{isOpen && (
-					<div className="absolute left-10 -mt-20 w-40 bg-white rounded-xl p-2 border  border-black/10 shadow-lg hover:shadow-xl outline-0">
+					<div className="absolute left-15 -mt-75 w-40 bg-white rounded-xl p-2 border  border-black/10 shadow-lg hover:shadow-xl outline-0">
+						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+							View Profile
+						</button>
+						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+							Settings
+						</button>
+
+						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+							Subscription
+						</button>
+
+						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+							Support
+						</button>
+
+						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+							Community
+						</button>
+
+						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+							Theme
+						</button>
 						<button
 							className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg text-red-500"
 							onClick={handleLogin}
 						>
 							Logout
-						</button>
-
-						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
-							Theme
 						</button>
 					</div>
 				)}
