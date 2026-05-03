@@ -30,7 +30,9 @@ export default function Ai() {
 					>
 						<option>ChatGPT 4o</option>
 						<option>Claude Code</option>
-						<option>Deepseek</option>
+						<option>DeepSeek</option>
+						<option>Gemini 1.5</option>
+						<option>Grok 4.20</option>
 					</select>
 
 					<img
