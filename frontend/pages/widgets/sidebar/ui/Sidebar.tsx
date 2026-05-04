@@ -9,8 +9,10 @@ import {
 	MessageCircle,
 	Settings
 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import UserMenu from '../../../../shared/lib/ui/UserMenu'
 export default function Sidebar() {
+	const navigate = useNavigate()
 	return (
 		<>
 			<aside>
@@ -25,16 +27,17 @@ export default function Sidebar() {
 				>
 					<div className="flex flex-col items-center gap-4 mt-20 mr-1">
 						{[
-							House,
-							MessageCircle,
-							History,
-							Bot,
-							FolderClosed,
-							GitBranch,
-							Database
-						].map((Icon, index) => (
+							{ icon: House, path: '/' },
+							{ icon: MessageCircle, path: '/chat' },
+							{ icon: History, path: '/history' },
+							{ icon: Bot, path: '/bot' },
+							{ icon: FolderClosed, path: '/folder' },
+							{ icon: GitBranch, path: '/git' },
+							{ icon: Database, path: '/database' }
+						].map(({ icon: Icon, path }, index) => (
 							<div
 								key={index}
+								onClick={() => navigate(path)}
 								className="
         					relative px-4 py-2 cursor-pointer group
         					before:absolute before:left-0 before:top-0 before:bottom-0 

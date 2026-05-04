@@ -14,9 +14,9 @@ export default function Ai() {
 	const [enabled, setEnabled] = useState(false)
 
 	const handleSend = () => {
-		setEnabled(prev => !prev)
-
-		console.log('enabled', enabled)
+		if (enabled) {
+			setEnabled(false)
+		}
 	}
 
 	return (
@@ -82,7 +82,8 @@ export default function Ai() {
 				<div className="w-full flex flex-col items-center mt-10">
 					<input
 						type="text"
-						className="w-full max-w-2xl h-32 px-8 pt-1 pb-20 border rounded-2xl placeholder:text-gray-600 transition-shadow border-black/10 shadow-lg hover:shadow-xl outline-0"
+						onKeyDown={e => e.key === 'Enter' && handleSend}
+						className="w-full max-w-2xl h-32 px-8 pt-1 pb-20 border rounded-2xl placeholder:text-gray-600 transition-shadow border-black/10 shadow-lg hover:shadow-xl outline-0 text-black"
 						placeholder="Ask AI a question or make a request..."
 					/>
 
@@ -123,6 +124,7 @@ export default function Ai() {
 
 					{/* SEND */}
 					<button
+						onClick={handleSend}
 						onKeyDown={event => event.key === 'Enter' && handleSend()}
 						className="bg-black text-white w-8 h-8 rounded-md mt-4 2xl:ml-155 2xl:-mt-7 xl:ml-150 xl:-mt-7"
 					>
