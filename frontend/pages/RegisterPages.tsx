@@ -1,3 +1,4 @@
+import { UserCheck } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
@@ -51,6 +52,30 @@ export default function RegisterPages() {
 						Create an Account?
 					</h1>
 				</header>
+
+				{/* USERNAME */}
+				<div className="flex flex-col gap-1">
+					<div className="relative">
+						<input
+							{...register('username', {
+								required: 'Username is required'
+							})}
+							placeholder="Username"
+							className={`w-full border p-3 pl-10 rounded-xl focus:outline-blue-500 ${
+								errors.email ? 'border-red-500' : 'border-gray-300'
+							}`}
+						/>
+
+						<UserCheck
+							className="absolute left-2 top-3 text-gray-400"
+							size={30}
+						/>
+					</div>
+
+					{errors.email && (
+						<span className="text-red-500 text-sm">{errors.email.message}</span>
+					)}
+				</div>
 
 				{/* EMAIL */}
 				<div className="flex flex-col gap-1">
@@ -113,9 +138,9 @@ export default function RegisterPages() {
 				<div>
 					<input
 						type="checkbox"
-						className="absolute top-103"
+						className="absolute top-112.5"
 					/>
-					<span className="absolute top-101.5 left-160">
+					<span className="absolute top-111 left-160">
 						I agree to the{' '}
 						<Link
 							to="/"
