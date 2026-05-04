@@ -110,20 +110,12 @@ export default function RegisterPages() {
 					)}
 				</div>
 
-				{/* FORGOT PASSWORD */}
-				<Link
-					to="/forgotten-password"
-					className="text-sm text-blue-600 hover:underline self-end"
-				>
-					Forgot Password?
-				</Link>
-
 				<div>
 					<input
 						type="checkbox"
-						className="absolute top-98"
+						className="absolute top-103"
 					/>
-					<span className="absolute top-96.5 left-160">
+					<span className="absolute top-101.5 left-160">
 						I agree to the{' '}
 						<Link
 							to="/"
@@ -137,16 +129,16 @@ export default function RegisterPages() {
 				{/* SUBMIT */}
 				<button
 					type="submit"
-					className="bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+					className="bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors relative top-5"
 				>
 					Create account
 				</button>
 
 				{/* DIVIDER */}
 				<div className="flex items-center gap-2">
-					<div className="w-full h-px bg-gray-300"></div>
-					<p className="text-gray-500 text-sm">OR</p>
-					<div className="w-full h-px bg-gray-300"></div>
+					<div className="w-full h-px bg-gray-300 relative top-5"></div>
+					<p className="text-gray-500 text-sm relative top-5">OR</p>
+					<div className="w-full h-px bg-gray-300 relative top-5"></div>
 				</div>
 
 				{/* SOCIAL */}
