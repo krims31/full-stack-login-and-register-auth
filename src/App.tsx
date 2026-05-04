@@ -4,6 +4,7 @@ import useAuth from '../frontend/features/hooks/useAuth'
 import Ai from '../frontend/pages/AI'
 import Chat from '../frontend/pages/Chat'
 import LoginPages from '../frontend/pages/LoginPages'
+import RegisterPages from '../frontend/pages/RegisterPages'
 import Sidebar from '../frontend/pages/widgets/sidebar/ui/Sidebar'
 import './App.css'
 
@@ -18,6 +19,10 @@ function App() {
 					<Route
 						path="/login"
 						element={<LoginPages />}
+					/>
+					<Route
+						path="/register"
+						element={<RegisterPages />}
 					/>
 					<Route
 						path="/"
