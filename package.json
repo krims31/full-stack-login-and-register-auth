@@ -12,6 +12,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@codewithhridoy/tailwind-browser": "^1.0.2",
 		"@radix-ui/react-switch": "^1.2.6",
 		"@tailwindcss/vite": "^4.2.4",
 		"axios": "^1.15.2",
