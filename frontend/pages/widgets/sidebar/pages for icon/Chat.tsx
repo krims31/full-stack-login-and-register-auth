@@ -1,7 +1,7 @@
 import { Paperclip } from 'lucide-react'
 import { useState } from 'react'
-import { useChat } from '../features/chat/stateChat'
-import Sidebar from './widgets/sidebar/ui/Sidebar'
+import { useChat } from '../../../../features/chat/stateChat'
+import Sidebar from '../ui/Sidebar'
 
 export default function Chat() {
 	const { messages } = useChat()

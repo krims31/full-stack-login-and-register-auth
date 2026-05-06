@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { ChatState } from '../../shared/type/ChatState'
+import { type ChatState } from '../../shared/type/ChatState'
 
 export const useChat = create<ChatState>((set, get) => ({
 	messages: [],

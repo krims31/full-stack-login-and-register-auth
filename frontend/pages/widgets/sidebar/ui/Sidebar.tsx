@@ -52,9 +52,13 @@ export default function Sidebar() {
 					</div>
 
 					<div className="flex flex-col items-center mt-60 gap-4 mr-1">
-						{[Headphones, Settings].map((Icon, index) => (
+						{[
+							{ icon: Headphones, path: '/headphones' },
+							{ icon: Settings, path: '/settings' }
+						].map(({ icon: Icon, path }, index) => (
 							<div
 								key={index}
+								onClick={() => navigate(path)}
 								className="
 									relative px-4 py-2 cursor-pointer group
         					before:absolute before:left-0 before:top-0 before:bottom-0 

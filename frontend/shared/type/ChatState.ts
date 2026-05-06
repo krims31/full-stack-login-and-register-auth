@@ -1,4 +1,4 @@
-import { Message } from './Message'
+import { type Message } from './Message'
 export type ChatState = {
 	messages: Message[]
 	addMessage: (msg: Message) => void
