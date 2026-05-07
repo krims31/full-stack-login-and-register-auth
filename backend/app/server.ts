@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import cors from 'cors'
 import express, { type Request, type Response } from 'express'
 import jwt from 'jsonwebtoken'
+import OpenAi from 'openai'
 
 interface myToken extends jwt.JwtPayload {
 	id: number
@@ -138,6 +139,44 @@ app.get('/api/auth/me', (req: Request, res: Response) => {
 		res.status(401).json({ message: 'Invalid token' })
 	}
 })
+
+app.post('/api/chat', async (req: Request, res: Response) => {
+	const { message, history } = req.body
+
+	if (!message) {
+		return res.status(400).json({ error: 'Message is required' })
+	}
+
+	try {
+		const reply = await getAiResponse(message, history)
+
+		res.json(reply)
+	} catch (error) {
+		console.error('Chat AI error:', error)
+		res.status(500).json({ error: 'Chat AI error' })
+	}
+})
+
+async function getAiResponse(
+	message: string,
+	history: { role: 'user' | 'assistant' | 'system'; text: string }[]
+) {
+	const openai = new OpenAi({
+		apiKey: process.env.OPENAI_API_KEY
+	})
+
+	const completion = await openai.chat.completions.create({
+		model: 'gpt-3.5-turbo',
+		messages: [
+			{ role: 'system', content: 'You are a helpful assistant.' },
+			...(history
+				? history.map(msg => ({ role: msg.role, content: msg.text }))
+				: []),
+			{ role: 'user', content: message }
+		]
+	})
+	return completion.choices[0].message.content
+}
 
 app.get('/api/auth/users', (req: Request, res: Response) => {
 	const usersWithoutPassword = users.map(excludePassword)
