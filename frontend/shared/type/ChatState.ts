@@ -1,6 +1,8 @@
 import { type Message } from './Message'
 export type ChatState = {
 	messages: Message[]
-	addMessage: (msg: Message) => void
-	sendMessage: (text: string) => void
+	isLoading: boolean
+	error: string | null
+	sendMessage: (text: string) => Promise<void>
+	clearMessage: () => void
 }

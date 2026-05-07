@@ -76,7 +76,7 @@ export default function Ai() {
 				<h1 className="text-3xl xl:text-5xl text-black font-bold leading-tight">
 					Good Afternoon, Krims <br />
 					<span className="text-gray-800">
-						What's on
+						What's on{' '}
 						<span
 							className="
 							bg-linear-to-r from-purple-400 to-purple-700 

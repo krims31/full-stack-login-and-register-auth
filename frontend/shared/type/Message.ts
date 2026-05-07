@@ -1,4 +1,6 @@
 export type Message = {
-	role: 'user' | 'ai'
+	id: string
+	timestamp: Date
+	role: 'user' | 'assistant'
 	text: string
 }
