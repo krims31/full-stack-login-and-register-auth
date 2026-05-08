@@ -81,7 +81,6 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		}
 	]
 
-	// Добавляем историю с правильными типами
 	if (Array.isArray(history) && history.length > 0) {
 		for (const msg of history) {
 			if (msg && msg.role && msg.content) {
@@ -98,44 +97,43 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		content: message
 	})
 
-	try {
-		const complete = await openrouter.chat.completions.create({
-			model: 'meta-llama/llama-3.3-70b-instruct:free',
-			messages: chatMessages,
-			temperature: 0.7,
-			max_tokens: 500
-		})
+	const freeModels = [
+		'google/gemini-2.0-flash-exp:free',
+		'qwen/qwen-2.5-7b-instruct:free',
+		'mistralai/mistral-7b-instruct-v0.1',
+		'openai/gpt-3.5-turbo'
+	]
 
-		const reply = complete.choices[0]?.message?.content
-
-		if (!reply) {
-			throw new Error('No reply from AI')
-		}
-
-		console.log('✅ Reply:', reply.substring(0, 100))
-		res.json({ reply })
-	} catch (error) {
-		console.error('OpenRouter API error: ', error)
-
+	for (const model of freeModels) {
 		try {
-			console.log('🔄 Trying fallback model...')
-			const fallbackComplete = await openrouter.chat.completions.create({
-				model: 'microsoft/phi-3-mini-128k:free',
+			console.log(`🔄 Trying model: ${model}`)
+
+			const complete = await openrouter.chat.completions.create({
+				model: model,
 				messages: chatMessages,
 				temperature: 0.7,
 				max_tokens: 500
 			})
 
-			const reply = fallbackComplete.choices[0]?.message?.content
-			console.log('✅ Fallback reply:', reply?.substring(0, 100))
-			res.json({ reply })
-		} catch (fallbackError: unknown) {
-			console.error('❌ Fallback models failed', fallbackError)
-			res.status(500).json({
-				error: 'AI service temporarily unavailable. Please try again later.'
-			})
+			const reply = complete.choices[0]?.message?.content
+
+			if (reply && reply.length > 0) {
+				console.log(`✅ Reply from ${model}:`, reply.substring(0, 100))
+				return res.json({ reply })
+			}
+		} catch (error: unknown) {
+			console.log(`❌ Model ${model} failed:`, error)
+
+			await new Promise(resolve => setTimeout(resolve, 1000))
 		}
 	}
+
+	console.error('❌ All models failed')
+	res.status(503).json({
+		reply:
+			'Извините, все AI модели временно недоступны из-за лимитов запросов. Пожалуйста, подождите 1-2 минуты или добавьте платежный метод на https://openrouter.ai/credits для снятия лимитов.',
+		error: 'Rate limit exceeded'
+	})
 })
 
 const users: User[] = []
