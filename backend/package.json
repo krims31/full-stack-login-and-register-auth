@@ -3,7 +3,7 @@
 	"type": "commonjs",
 	"scripts": {
 		"build": "tsc -p tsconfig.json",
-		"start": "node dist/server.js"
+		"start": "node dist/app/server.js"
 	},
 	"dependencies": {
 		"bcrypt": "^6.0.0",

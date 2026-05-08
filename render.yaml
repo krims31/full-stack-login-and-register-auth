@@ -2,9 +2,9 @@ services:
   - type: web
     name: backend
     runtime: node
-    rootDir: .
-    buildCommand: npm install
-    startCommand: node dist/server.js
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: node dist/app/server.js
     envVars:
       - key: OPENROUTER_API_KEY
         sync: false
