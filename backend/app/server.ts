@@ -98,8 +98,9 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 	})
 
 	const freeModels = [
-		'google/gemini-2.0-flash-exp:free',
-		'qwen/qwen-2.5-7b-instruct:free'
+		'meta-llama/llama-3.2-3b-instruct:free',
+		'nousresearch/hermes-3-llama-3.1-405b:free',
+		'microsoft/phi-3-mini-128k:free'
 	]
 
 	for (const model of freeModels) {
