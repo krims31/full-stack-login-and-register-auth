@@ -25,7 +25,7 @@ export const useChat = create<ChatState>((set, get) => ({
 
 			const response = await axios.post(
 				'http://localhost:5000/api/chat',
-				{ text, history },
+				{ message: text, history },
 				{
 					headers: {
 						'Content-Type': 'application/json',
@@ -34,11 +34,9 @@ export const useChat = create<ChatState>((set, get) => ({
 				}
 			)
 
-			const data = await response.data
-
 			const assistantMessage: Message = {
 				id: (Date.now() + 1).toString(),
-				text: data.reply,
+				text: response.data.reply,
 				role: 'assistant',
 				timestamp: new Date()
 			}

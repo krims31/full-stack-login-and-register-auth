@@ -1,18 +1,29 @@
 import { Paperclip } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useChat } from '../../../../features/chat/stateChat'
 import Sidebar from '../ui/Sidebar'
 
 export default function Chat() {
-	const { messages } = useChat()
-	const { sendMessage } = useChat()
+	const { messages, isLoading, sendMessage } = useChat()
 	const [text, setText] = useState('')
 	const [enabled, setEnabled] = useState(false)
+	const messagesEndRef = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [messages])
 
 	const handleSend = () => {
 		if (!text.trim()) return
 		sendMessage(text)
 		setText('')
+	}
+
+	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter' && !e.shiftKey) {
+			e.preventDefault()
+			handleSend()
+		}
 	}
 
 	return (
@@ -35,6 +46,18 @@ export default function Chat() {
 								{msg.text}
 							</div>
 						))}
+
+						{isLoading && (
+							<div className="bg-gray-200 text-black self-start p-3 rounded-xl">
+								<div className="flex gap-1">
+									<span className="animate-bounce">●</span>
+									<span className="animate-bounce delay-100">●</span>
+									<span className="animate-bounce delay-200">●</span>
+								</div>
+							</div>
+						)}
+
+						<div ref={messagesEndRef} />
 					</div>
 
 					<img
@@ -56,9 +79,12 @@ export default function Chat() {
 					<div className="w-full flex flex-col items-center mt-20 relative left-0">
 						<input
 							type={text}
-							onClick={handleSend}
+							value={text}
+							onChange={e => setText(e.target.value)}
+							onKeyDown={handleKeyPress}
 							className="w-full max-w-2xl h-32 px-8 pt-1 pb-20 border rounded-2xl placeholder:text-gray-600 transition-shadow border-black/10 shadow-lg hover:shadow-xl outline-0 text-black"
 							placeholder="Ask AI a question or make a request..."
+							disabled={isLoading}
 						/>
 
 						<button className="relative -mt-12 mr-auto border rounded-md px-2 xl:px-3 py-1 transition-shadow border-black/10 shadow-lg hover:shadow-xl xl:ml-75 2xl:ml-120 lg:ml-50 flex items-center gap-1 text-black max-[1280px]:ml-40">
@@ -95,6 +121,7 @@ export default function Chat() {
 						</div>
 						<button
 							onClick={handleSend}
+							disabled={!text.trim() || isLoading}
 							className="bg-black text-white w-8 h-8 rounded-md mt-4 2xl:ml-155 2xl:-mt-7 xl:ml-150 xl:-mt-7"
 						>
 							↑
