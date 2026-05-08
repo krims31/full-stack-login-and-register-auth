@@ -77,7 +77,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		{
 			role: 'system',
 			content:
-				'You are a helpful AI assistant. Answer concisely and in the same language as the user.'
+				'Ты полезный AI ассистент. Отвечай кратко, дружелюбно и всегда на том же языке, что и пользователь. Если пользователь пишет по-русски - отвечай по-русски. Если по-английски - отвечай по-английски.'
 		}
 	]
 

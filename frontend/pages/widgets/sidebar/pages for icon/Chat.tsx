@@ -48,7 +48,7 @@ export default function Chat() {
 						))}
 
 						{isLoading && (
-							<div className="bg-gray-200 text-black self-start p-3 rounded-xl">
+							<div className="bg-gray-200 text-black self-start p-2 rounded-xl">
 								<div className="flex gap-1">
 									<span className="animate-bounce">●</span>
 									<span className="animate-bounce delay-100">●</span>
@@ -59,22 +59,6 @@ export default function Chat() {
 
 						<div ref={messagesEndRef} />
 					</div>
-
-					<img
-						src="./purple-ball-png-3d-geometric-shape-transparent-background_53876-977295.jpg"
-						alt="purple-circle"
-						className="w-20 h-20 animate-spin mb-6 flex items-center justify-center relative left-195 top-8"
-					/>
-
-					<h1 className="text-3xl xl:text-5xl text-black font-bold leading-tight relative left-140 top-10">
-						Good Afternoon, Krims <br />
-						<span className="text-gray-800">
-							What's on{' '}
-							<span className="bg-linear-to-r from-purple-400 to-purple-700 bg-clip-text text-transparent">
-								your mind?
-							</span>
-						</span>
-					</h1>
 
 					<div className="w-full flex flex-col items-center mt-20 relative left-0">
 						<input
