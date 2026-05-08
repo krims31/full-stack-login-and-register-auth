@@ -50,9 +50,9 @@ export default function Chat() {
 						{isLoading && (
 							<div className="bg-gray-200 text-black self-start p-2 rounded-xl">
 								<div className="flex gap-1">
-									<span className="animate-bounce">●</span>
-									<span className="animate-bounce delay-100">●</span>
-									<span className="animate-bounce delay-200">●</span>
+									<span className="animate-bounce text-sm">●</span>
+									<span className="animate-bounce delay-100 text-sm">●</span>
+									<span className="animate-bounce delay-200 text-sm">●</span>
 								</div>
 							</div>
 						)}
@@ -60,7 +60,7 @@ export default function Chat() {
 						<div ref={messagesEndRef} />
 					</div>
 
-					<div className="w-full flex flex-col items-center mt-20 relative left-0">
+					<div className="w-full flex flex-col items-center mt-70 relative left-0">
 						<input
 							type={text}
 							value={text}

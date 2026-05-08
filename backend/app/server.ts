@@ -99,9 +99,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
 	const freeModels = [
 		'google/gemini-2.0-flash-exp:free',
-		'qwen/qwen-2.5-7b-instruct:free',
-		'mistralai/mistral-7b-instruct-v0.1',
-		'openai/gpt-3.5-turbo'
+		'qwen/qwen-2.5-7b-instruct:free'
 	]
 
 	for (const model of freeModels) {
