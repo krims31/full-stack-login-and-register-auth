@@ -97,7 +97,6 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		content: message
 	})
 
-	// Актуальные бесплатные модели (май 2026)
 	const freeModels = [
 		'openrouter/auto',
 		'nousresearch/hermes-3-llama-3.1-405b:free',
