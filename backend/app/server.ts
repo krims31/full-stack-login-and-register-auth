@@ -77,7 +77,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		{
 			role: 'system',
 			content:
-				'Ты полезный AI ассистент. Отвечай кратко, дружелюбно и всегда на том же языке, что и пользователь. Если пользователь пишет по-русски - отвечай по-русски. Если по-английски - отвечай по-английски.'
+				'Ты полезный AI ассистент. Отвечай кратко, дружелюбно и всегда на русском языке.'
 		}
 	]
 
@@ -97,10 +97,11 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		content: message
 	})
 
+	// Актуальные бесплатные модели (май 2026)
 	const freeModels = [
-		'meta-llama/llama-3.2-3b-instruct:free',
+		'openrouter/auto',
 		'nousresearch/hermes-3-llama-3.1-405b:free',
-		'microsoft/phi-3-mini-128k:free'
+		'meta-llama/llama-3.2-3b-instruct:free'
 	]
 
 	for (const model of freeModels) {
@@ -120,19 +121,26 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 				console.log(`✅ Reply from ${model}:`, reply.substring(0, 100))
 				return res.json({ reply })
 			}
-		} catch (error: unknown) {
-			console.log(`❌ Model ${model} failed:`, error)
-
+		} catch {
+			console.log(`❌ Model ${model} failed, trying next...`)
 			await new Promise(resolve => setTimeout(resolve, 1000))
 		}
 	}
 
-	console.error('❌ All models failed')
-	res.status(503).json({
-		reply:
-			'Извините, все AI модели временно недоступны из-за лимитов запросов. Пожалуйста, подождите 1-2 минуты или добавьте платежный метод на https://openrouter.ai/credits для снятия лимитов.',
-		error: 'Rate limit exceeded'
-	})
+	// Fallback ответы для демонстрации
+	console.log('⚠️ Using fallback response')
+
+	const fallbackResponses = [
+		`Привет! Я AI-ассистент. Сейчас я в демо-режиме, так как API временно перегружен. Твое сообщение: "${message}". В реальном режиме я бы ответил более осмысленно!`,
+		`Получил твое сообщение: "${message}". К сожалению, AI сервис сейчас на лимите, но я работаю в демо-режиме. Попробуй позже для полноценного ответа.`,
+		`Отличный вопрос про "${message}"! В демо-режиме я могу только подтвердить получение. Для реального ответа нужно подождать 1-2 минуты, пока сбросятся лимиты API.`,
+		`Спасибо за сообщение "${message}"! Я в демо-режиме ожидания API. Как только лимиты сбросятся, я смогу полноценно отвечать на твои вопросы.`
+	]
+
+	const randomResponse =
+		fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
+
+	res.json({ reply: randomResponse })
 })
 
 const users: User[] = []
