@@ -71,17 +71,34 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		return res.status(400).json({ error: 'Message is required' })
 	}
 
+	  const chatMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
+    {
+      role: 'system',
+      content: 'You are a helpful AI assistant. Answer concisely and in the same language as the user.'
+    }
+  ]
+  
+  // Добавляем историю с правильными типами
+  if (Array.isArray(history) && history.length > 0) {
+    for (const msg of history) {
+      if (msg && msg.role && msg.content) {
+        chatMessages.push({
+          role: msg.role as 'user' | 'assistant',
+          content: msg.content
+        })
+      }
+    }
+  }
+  
+  chatMessages.push({ 
+    role: 'user', 
+    content: message 
+  })
+
 	try {
 		const complete = await openrouter.chat.completions.create({
-			model: 'deepseek/deepseek-chat:free',
-			messages: [
-				{
-					role: 'system',
-					content: 'You are a helpful assistant.'
-				},
-				...(history || []),
-				{ role: 'user', content: message }
-			],
+			model: 'google/gemini-2.0-flash-lite-preview-02-05:free',
+			messages: chatMessages,
 			temperature: 0.7
 		})
 
