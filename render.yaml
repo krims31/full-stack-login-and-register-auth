@@ -2,9 +2,10 @@ services:
   - type: web
     name: backend
     runtime: node
+    repo: https://github.com/krims31/full-stack-AI
     rootDir: backend
     buildCommand: npm install && npm run build
-    startCommand: node dist/app/server.js
+    startCommand: node dist/server.js
     envVars:
       - key: OPENROUTER_API_KEY
         sync: false
