@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .env
 dotenv.env
+.env
+.env.*
+*.env
