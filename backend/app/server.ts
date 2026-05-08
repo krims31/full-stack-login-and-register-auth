@@ -55,6 +55,15 @@ const openrouter = new OpenAI({
 	}
 })
 
+app.get('/api/test', (req: Request, res: Response) => {
+	res.json({ message: 'Server is working!' })
+})
+
+app.post('/api/test-chat', (req: Request, res: Response) => {
+	console.log('Test chat received:', req.body)
+	res.json({ reply: 'This is a test response from server!' })
+})
+
 app.post('/api/chat', async (req: Request, res: Response) => {
 	const { message, history } = req.body
 
