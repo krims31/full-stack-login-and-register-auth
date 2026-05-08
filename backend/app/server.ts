@@ -71,7 +71,7 @@ app.post('/api/test-chat', (req: Request, res: Response) => {
 app.post('/api/chat', async (req: Request, res: Response) => {
 	const { message, history } = req.body
 
-	console.log('📨 Message:', message)
+	console.log('Message:', message)
 
 	if (!message) {
 		return res.status(400).json({ error: 'Message is required' })
@@ -109,7 +109,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
 	for (const model of freeModels) {
 		try {
-			console.log(`🔄 Trying model: ${model}`)
+			console.log(`Trying model: ${model}`)
 
 			const complete = await openrouter.chat.completions.create({
 				model: model,
