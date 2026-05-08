@@ -78,7 +78,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
 		const reply = complete.choices[0].message.content
 
-		res.json(reply)
+		res.json({ reply })
 	} catch (error) {
 		console.error('OpenRouter API error: ', error)
 		res.status(500).json({ error: 'Something went wrong' })
