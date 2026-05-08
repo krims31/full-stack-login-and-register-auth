@@ -24,7 +24,7 @@ export const useChat = create<ChatState>((set, get) => ({
 			const token = localStorage.getItem('token')
 
 			const response = await axios.post(
-				'http://localhost:5000/api/chat',
+				'/api/chat',
 				{ message: text, history },
 				{
 					headers: {
