@@ -2,7 +2,7 @@ services:
   - type: web
     name: backend
     runtime: node
-    rootDir: backend
+    rootDir: .
     buildCommand: npm install
     startCommand: node dist/server.js
     envVars:
