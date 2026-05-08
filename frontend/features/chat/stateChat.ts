@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { create } from 'zustand'
 import { type ChatState } from '../../shared/type/ChatState'
-import { Message } from '../../shared/type/Message'
+import { type Message } from '../../shared/type/Message'
 
 export const useChat = create<ChatState>((set, get) => ({
 	messages: [],
