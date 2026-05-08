@@ -1,8 +1,11 @@
 import bcrypt from 'bcrypt'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import express, { type Request, type Response } from 'express'
 import jwt from 'jsonwebtoken'
-import OpenAi from 'openai'
+import OpenAI from 'openai'
+
+dotenv.config()
 
 interface myToken extends jwt.JwtPayload {
 	id: number
@@ -42,6 +45,45 @@ app.use(
 )
 
 app.use(express.json())
+
+const openrouter = new OpenAI({
+	baseURL: 'https://openrouter.ai/api/v1',
+	apiKey: process.env.OPENROUTER_API_KEY,
+	defaultHeaders: {
+		'HTTP-Referer': 'https://localhost:5173',
+		'X-Title': 'My AI chat app'
+	}
+})
+
+app.post('/api/chat', async (req: Request, res: Response) => {
+	const { message, history } = req.body
+
+	if (!message) {
+		return res.status(400).json({ error: 'Message is required' })
+	}
+
+	try {
+		const complete = await openrouter.chat.completions.create({
+			model: 'deepseek/deepseek-chat:free',
+			messages: [
+				{
+					role: 'system',
+					content: 'You are a helpful assistant.'
+				},
+				...(history || []),
+				{ role: 'user', content: message }
+			],
+			temperature: 0.7
+		})
+
+		const reply = complete.choices[0].message.content
+
+		res.json(reply)
+	} catch (error) {
+		console.error('OpenRouter API error: ', error)
+		res.status(500).json({ error: 'Something went wrong' })
+	}
+})
 
 const users: User[] = []
 let userId: number = 1
@@ -139,44 +181,6 @@ app.get('/api/auth/me', (req: Request, res: Response) => {
 		res.status(401).json({ message: 'Invalid token' })
 	}
 })
-
-app.post('/api/chat', async (req: Request, res: Response) => {
-	const { message, history } = req.body
-
-	if (!message) {
-		return res.status(400).json({ error: 'Message is required' })
-	}
-
-	try {
-		const reply = await getAiResponse(message, history)
-
-		res.json(reply)
-	} catch (error) {
-		console.error('Chat AI error:', error)
-		res.status(500).json({ error: 'Chat AI error' })
-	}
-})
-
-async function getAiResponse(
-	message: string,
-	history: { role: 'user' | 'assistant' | 'system'; text: string }[]
-) {
-	const openai = new OpenAi({
-		apiKey: process.env.OPENAI_API_KEY
-	})
-
-	const completion = await openai.chat.completions.create({
-		model: 'gpt-3.5-turbo',
-		messages: [
-			{ role: 'system', content: 'You are a helpful assistant.' },
-			...(history
-				? history.map(msg => ({ role: msg.role, content: msg.text }))
-				: []),
-			{ role: 'user', content: message }
-		]
-	})
-	return completion.choices[0].message.content
-}
 
 app.get('/api/auth/users', (req: Request, res: Response) => {
 	const usersWithoutPassword = users.map(excludePassword)

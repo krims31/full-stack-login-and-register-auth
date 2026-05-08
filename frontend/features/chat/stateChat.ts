@@ -25,7 +25,7 @@ export const useChat = create<ChatState>((set, get) => ({
 
 			const response = await axios.post(
 				'http://localhost:5000/api/chat',
-				{ text },
+				{ text, history },
 				{
 					headers: {
 						'Content-Type': 'application/json',
