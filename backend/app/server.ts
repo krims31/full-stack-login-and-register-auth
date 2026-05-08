@@ -67,47 +67,74 @@ app.post('/api/test-chat', (req: Request, res: Response) => {
 app.post('/api/chat', async (req: Request, res: Response) => {
 	const { message, history } = req.body
 
+	console.log('📨 Message:', message)
+
 	if (!message) {
 		return res.status(400).json({ error: 'Message is required' })
 	}
 
-	  const chatMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-    {
-      role: 'system',
-      content: 'You are a helpful AI assistant. Answer concisely and in the same language as the user.'
-    }
-  ]
-  
-  // Добавляем историю с правильными типами
-  if (Array.isArray(history) && history.length > 0) {
-    for (const msg of history) {
-      if (msg && msg.role && msg.content) {
-        chatMessages.push({
-          role: msg.role as 'user' | 'assistant',
-          content: msg.content
-        })
-      }
-    }
-  }
-  
-  chatMessages.push({ 
-    role: 'user', 
-    content: message 
-  })
+	const chatMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
+		{
+			role: 'system',
+			content:
+				'You are a helpful AI assistant. Answer concisely and in the same language as the user.'
+		}
+	]
+
+	// Добавляем историю с правильными типами
+	if (Array.isArray(history) && history.length > 0) {
+		for (const msg of history) {
+			if (msg && msg.role && msg.content) {
+				chatMessages.push({
+					role: msg.role as 'user' | 'assistant',
+					content: msg.content
+				})
+			}
+		}
+	}
+
+	chatMessages.push({
+		role: 'user',
+		content: message
+	})
 
 	try {
 		const complete = await openrouter.chat.completions.create({
-			model: 'google/gemini-2.0-flash-lite-preview-02-05:free',
+			model: 'deepseek/deepseek-r1:free',
 			messages: chatMessages,
-			temperature: 0.7
+			temperature: 0.7,
+			max_tokens: 500
 		})
 
-		const reply = complete.choices[0].message.content
+		const reply = complete.choices[0]?.message?.content
 
+		if (!reply) {
+			throw new Error('No reply from AI')
+		}
+
+		console.log('✅ Reply:', reply.substring(0, 100))
 		res.json({ reply })
 	} catch (error) {
 		console.error('OpenRouter API error: ', error)
-		res.status(500).json({ error: 'Something went wrong' })
+
+		try {
+			console.log('🔄 Trying fallback model...')
+			const fallbackComplete = await openrouter.chat.completions.create({
+				model: 'microsoft/phi-3-mini-128k:free',
+				messages: chatMessages,
+				temperature: 0.7,
+				max_tokens: 500
+			})
+
+			const reply = fallbackComplete.choices[0]?.message?.content
+			console.log('✅ Fallback reply:', reply?.substring(0, 100))
+			res.json({ reply })
+		} catch (fallbackError: unknown) {
+			console.error('❌ Fallback models failed', fallbackError)
+			res.status(500).json({
+				error: 'AI service temporarily unavailable. Please try again later.'
+			})
+		}
 	}
 })
 
