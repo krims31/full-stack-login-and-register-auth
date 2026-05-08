@@ -100,7 +100,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
 	try {
 		const complete = await openrouter.chat.completions.create({
-			model: 'deepseek/deepseek-r1:free',
+			model: 'meta-llama/llama-3.3-70b-instruct:free',
 			messages: chatMessages,
 			temperature: 0.7,
 			max_tokens: 500
