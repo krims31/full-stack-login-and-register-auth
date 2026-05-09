@@ -106,7 +106,9 @@ export default function Chat() {
 						<button
 							onClick={handleSend}
 							disabled={!text.trim() || isLoading}
-							className="bg-black text-white w-8 h-8 rounded-md mt-4 2xl:ml-155 2xl:-mt-7 xl:ml-150 xl:-mt-7"
+							className="bg-black text-white w-8 h-8 rounded-md 
+							hover:scale-110 active:scale-90 transition-transform
+							firefox:active:translate-y-0.5 mt-4 2xl:ml-155 2xl:-mt-7 xl:ml-150 xl:-mt-7"
 						>
 							↑
 						</button>

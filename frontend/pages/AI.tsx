@@ -81,7 +81,7 @@ export default function Ai() {
 							className="
 							bg-linear-to-r from-purple-400 to-purple-700 
 							bg-clip-text text-transparent
-							firefox:text-purple-600 firefox:bg-none // Firefox fallback для градиента
+							firefox:text-purple-600 firefox:bg-none
 						"
 						>
 							your mind?

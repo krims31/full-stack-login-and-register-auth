@@ -11,7 +11,7 @@ export const ProtectedRoutes = ({ children }: Props) => {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center absolute top-90 left-185 text-5xl font-mono text-black">
+			<div className="flex items-center justify-center absolute top-90 left-180 text-5xl font-mono text-black">
 				Loading...
 			</div>
 		)
