@@ -20,9 +20,7 @@ export default function Ai() {
 				<div className="flex items-center gap-4">
 					<select
 						className="border rounded-md px-6 py-1 transition-shadow
-             border-black/10 shadow-lg hover:shadow-xl outline-0
-             focus:ring-2 focus:ring-purple-500 focus:ring-offset-1
-             firefox:focus:ring-purple-400"
+             border-black/10 shadow-lg hover:shadow-xl outline-0"
 					>
 						<option>ChatGPT 4o</option>
 						<option>Claude Code</option>
@@ -95,7 +93,7 @@ export default function Ai() {
 							focus:ring-2 focus:ring-purple-500 focus:border-transparent
 							firefox:focus:ring-purple-400
 							firefox:placeholder:opacity-60 // Firefox fix для placeholder
-							webkit:autofill:bg-yellow-50" // Chrome autofill fix
+							webkit:autofill:bg-yellow-50"
 						placeholder="Ask AI a question or make a request..."
 					/>
 
@@ -115,8 +113,7 @@ export default function Ai() {
 					<div className="flex flex-wrap justify-center items-center gap-4 -mt-8">
 						<select
 							className="border rounded-md px-3 py-1 xl:px-3 transition-shadow 
-							border-black/10 shadow-lg hover:shadow-xl mr-50 2xl:ml-30 text-black
-							focus:ring-2 focus:ring-purple-500"
+							border-black/10 shadow-lg hover:shadow-xl mr-50 2xl:ml-30 text-black"
 						>
 							<option>Writing Styles</option>
 						</select>
@@ -136,7 +133,6 @@ export default function Ai() {
 									transition-colors duration-200 ease-in-out
 									${enabled ? 'bg-violet-600' : 'bg-gray-300'}
 									firefox:transition-all
-									peer-focus:ring-2 peer-focus:ring-purple-500
 								`}
 							>
 								<div
