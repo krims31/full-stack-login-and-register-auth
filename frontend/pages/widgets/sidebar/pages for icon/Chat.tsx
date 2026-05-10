@@ -1,30 +1,19 @@
 import { Paperclip } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
-import { useChat } from '../../../../features/chat/stateChat'
+import useChatAi from '../../../../features/hooks/useChatAi'
 import Sidebar from '../ui/Sidebar'
 
 export default function Chat() {
-	const { messages, isLoading, sendMessage } = useChat()
-	const [text, setText] = useState('')
-	const [enabled, setEnabled] = useState(false)
-	const messagesEndRef = useRef<HTMLDivElement>(null)
-
-	useEffect(() => {
-		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-	}, [messages])
-
-	const handleSend = () => {
-		if (!text.trim()) return
-		sendMessage(text)
-		setText('')
-	}
-
-	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter' && !e.shiftKey) {
-			e.preventDefault()
-			handleSend()
-		}
-	}
+	const {
+		messages,
+		isLoading,
+		handleSend,
+		enabled,
+		text,
+		setText,
+		setEnabled,
+		messagesEndRef,
+		handleKeyPress
+	} = useChatAi()
 
 	return (
 		<>

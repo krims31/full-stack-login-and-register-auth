@@ -11,8 +11,6 @@ export const useChat = create<ChatState>((set, get) => ({
 	sendMessage: async (text: string) => {
 		const { messages } = get()
 
-		console.log(import.meta.env.VITE_API_URL)
-
 		const newMessage: Message = {
 			id: Date.now().toString(),
 			text,
