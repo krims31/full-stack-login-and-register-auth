@@ -25,11 +25,11 @@ export const useChat = create<ChatState>((set, get) => ({
 		try {
 			const token = localStorage.getItem('token')
 
-			const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+			const API_URL = 'https://full-stack-ai-6uq7.onrender.com'
 
 			const url = `${API_URL}/chat`
 
-			console.log("URL:", url);
+			console.log('URL:', url)
 
 			const response = await axios.post(
 				url,
