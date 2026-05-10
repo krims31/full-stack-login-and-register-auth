@@ -100,7 +100,7 @@ export default function Chat() {
 									/>
 								</div>
 
-								<span className="text-sm text-gray-400">Citation</span>
+								<span className="text-sm text-gray-500">Citation</span>
 							</label>
 						</div>
 						<button

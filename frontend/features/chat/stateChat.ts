@@ -27,8 +27,12 @@ export const useChat = create<ChatState>((set, get) => ({
 
 			const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
+			const url = `${API_URL}/chat`
+
+			console.log("URL:", url);
+
 			const response = await axios.post(
-				`${API_URL}/chat`,
+				url,
 				{ message: text, history },
 				{
 					headers: {
