@@ -27,7 +27,7 @@ export const useChat = create<ChatState>((set, get) => ({
 
 			const API_URL = 'https://full-stack-ai-6uq7.onrender.com'
 
-			const url = `${API_URL}/chat`
+			const url = `${API_URL}/api/chat`
 
 			console.log('URL:', url)
 
