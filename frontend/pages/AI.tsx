@@ -8,16 +8,10 @@ import {
 	User,
 	UserRoundPlus
 } from 'lucide-react'
-import { useState } from 'react'
+import useAI from '../features/hooks/useAI'
 
 export default function Ai() {
-	const [enabled, setEnabled] = useState(false)
-
-	const handleSend = () => {
-		if (enabled) {
-			setEnabled(false)
-		}
-	}
+	const { enabled, setEnabled, handleSend } = useAI()
 
 	return (
 		<div className="min-h-screen max-w-360 mx-auto px-4 firefox:overflow-x-hidden">
