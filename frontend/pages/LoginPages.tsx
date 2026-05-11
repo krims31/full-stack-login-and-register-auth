@@ -30,7 +30,16 @@ export default function LoginPages() {
 				}
 			)
 
+			console.log('Full response:', response)
+			console.log('Response:', response.data)
 			localStorage.setItem('token', response.data.token)
+
+			if (response.data.token) {
+				localStorage.setItem('token', response.data.token);
+				console.log("Token saved!")
+			} else {
+				console.log("Token not saved!")
+			}
 
 			setAuth(true)
 
