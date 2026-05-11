@@ -23,17 +23,11 @@ interface User {
 const excludePassword = <T extends { password: string }>(
 	obj: T
 ): Omit<T, 'password'> => {
-	const result: Partial<T> = {}
-	for (const key in obj) {
-		if (key !== 'password') {
-			result[key] = obj[key]
-		}
-	}
-	return result as Omit<T, 'password'>
+	const { password: _, ...rest } = obj
+	return rest
 }
 
 const PORT = process.env.PORT || 5000
-
 const app = express()
 
 app.use(
@@ -131,25 +125,20 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 		}
 	}
 
-	// Fallback ответы для демонстрации
-	console.log('⚠️ Using fallback response')
-
 	const fallbackResponses = [
-		`Привет! Я AI-ассистент. Сейчас я в демо-режиме, так как API временно перегружен. Твое сообщение: "${message}". В реальном режиме я бы ответил более осмысленно!`,
-		`Получил твое сообщение: "${message}". К сожалению, AI сервис сейчас на лимите, но я работаю в демо-режиме. Попробуй позже для полноценного ответа.`,
-		`Отличный вопрос про "${message}"! В демо-режиме я могу только подтвердить получение. Для реального ответа нужно подождать 1-2 минуты, пока сбросятся лимиты API.`,
-		`Спасибо за сообщение "${message}"! Я в демо-режиме ожидания API. Как только лимиты сбросятся, я смогу полноценно отвечать на твои вопросы.`
+		`Привет! Я AI-ассистент. Сейчас я в демо-режиме. Твое сообщение: "${message}"`,
+		`Получил твое сообщение: "${message}". AI сервис сейчас на лимите.`,
+		`Отличный вопрос про "${message}"! В демо-режиме я могу только подтвердить получение.`
 	]
 
 	const randomResponse =
 		fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
-
 	res.json({ reply: randomResponse })
 })
 
-const initUser = () => {
-	const user = userStorage.getAll()
-	if (user.length === 0) {
+const initUser = async () => {
+	const users = userStorage.getAll()
+	if (users.length === 0) {
 		const hashPassword = bcrypt.hashSync('123456', 10)
 		userStorage.save({
 			id: 1,
@@ -158,7 +147,7 @@ const initUser = () => {
 			password: hashPassword,
 			createdAt: new Date().toISOString()
 		})
-		console.log('User created!')
+		console.log('✅ Test user created in userStorage')
 	}
 }
 
@@ -166,34 +155,39 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
 	const { email, password, username } = req.body
 
 	if (!email || !password) {
-		return res.status(400).json('Email and password are required')
+		return res.status(400).json({ message: 'Email and password are required' })
 	}
 
-	const existingUser = userStorage.getEmail(email)
+	try {
+		const existingUser = userStorage.getEmail(email)
 
-	if (existingUser) {
-		return res.status(400).json('User already exists')
+		if (existingUser) {
+			return res.status(400).json({ message: 'User already exists' })
+		}
+
+		const hashedPassword = await bcrypt.hash(password, 10)
+		const allUsers = userStorage.getAll()
+		const newId = allUsers.length + 1
+
+		const newUser: User = {
+			id: newId,
+			email,
+			username: username || email.split('@')[0],
+			password: hashedPassword,
+			createdAt: new Date().toISOString()
+		}
+
+		userStorage.save(newUser)
+		const { password: _, ...userWithoutPassword } = newUser
+
+		res.status(201).json({
+			message: 'User registered successfully',
+			user: userWithoutPassword
+		})
+	} catch (error) {
+		console.error(error)
+		res.status(500).json({ message: 'Internal server error' })
 	}
-
-	const hashedPassword = await bcrypt.hash(password, 10)
-
-	const allUsers = userStorage.getAll()
-	const newId = allUsers.length + 1
-
-	const newUser: User = {
-		id: newId,
-		email,
-		username: username || email.split('@')[0],
-		password: hashedPassword,
-		createdAt: new Date().toISOString()
-	}
-
-	userStorage.save(newUser)
-
-	res.status(201).json({
-		message: 'User registered successfully',
-		user: excludePassword(newUser)
-	})
 })
 
 app.post('/api/auth/login', async (req: Request, res: Response) => {
@@ -203,27 +197,29 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 		return res.status(400).json({ message: 'Email and password are required' })
 	}
 
-	const user = userStorage.getEmail(email)
+	try {
+		const user = userStorage.getEmail(email)
 
-	if (!user) {
-		return res.status(400).json({ message: 'User not found' })
+		if (!user) {
+			return res.status(400).json({ message: 'User not found' })
+		}
+
+		const isMatch = await bcrypt.compare(password, user.password)
+
+		if (!isMatch) {
+			return res.status(400).json({ message: 'Password is incorrect' })
+		}
+
+		const token = jwt.sign({ id: user.id, email: user.email }, 'secret', {
+			expiresIn: '15m'
+		})
+
+		const { password: _, ...userWithoutPassword } = user
+		res.json({ token, user: userWithoutPassword })
+	} catch (error) {
+		console.error(error)
+		res.status(500).json({ message: 'Internal server error' })
 	}
-
-	const isMatch = await bcrypt.compare(password, user.password)
-
-	if (!isMatch) {
-		return res.status(400).json({ message: 'Password is incorrect' })
-	}
-
-	const token = jwt.sign({ id: user.id, email: user.email }, 'secret', {
-		expiresIn: '15m'
-	})
-
-	res.json({
-		token,
-		email: user.email,
-		username: user.username
-	})
 })
 
 app.get('/api/auth/me', (req: Request, res: Response) => {
