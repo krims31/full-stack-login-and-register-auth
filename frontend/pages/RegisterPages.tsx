@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { UserCheck } from 'lucide-react'
 import { useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
@@ -5,13 +6,9 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import { MdOutlineMailOutline } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import type { Inputs } from '../entities/user/types'
-import { useAuthState } from '../features/auth/state'
-import { login } from '../shared/api/axios'
 
 export default function RegisterPages() {
 	const [showPassword, setShowPassword] = useState(false)
-
-	const setAuth = useAuthState(state => state.setAuth)
 
 	const {
 		register,
@@ -23,14 +20,18 @@ export default function RegisterPages() {
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		try {
-			const response = await login(data.email, data.password)
+			const response = await axios.post(
+				'https://full-stack-ai-6uq7.onrender.com/api/auth/register',
+				{
+					email: data.email,
+					password: data.password,
+					username: data.username
+				}
+			)
 
-			// сохраняем токен
-			localStorage.setItem('token', response.token)
+			console.log('Registration success:', response.data)
 
-			setAuth(true)
-
-			navigate('/')
+			navigate('/login')
 		} catch (error) {
 			console.error('ERROR', error)
 		}
@@ -58,7 +59,7 @@ export default function RegisterPages() {
 							})}
 							placeholder="Username"
 							className={`w-full border p-3 pl-10 rounded-xl text-black focus:outline-blue-500 ${
-								errors.email ? 'border-red-500' : 'border-gray-300'
+								errors.username ? 'border-red-500' : 'border-gray-300'
 							}`}
 						/>
 
@@ -68,8 +69,10 @@ export default function RegisterPages() {
 						/>
 					</div>
 
-					{errors.email && (
-						<span className="text-red-500 text-sm">{errors.email.message}</span>
+					{errors.username && (
+						<span className="text-red-500 text-sm">
+							{errors.username.message}
+						</span>
 					)}
 				</div>
 

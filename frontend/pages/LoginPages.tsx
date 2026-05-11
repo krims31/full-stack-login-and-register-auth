@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
@@ -5,7 +6,6 @@ import { MdOutlineMailOutline } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import type { Inputs } from '../entities/user/types'
 import { useAuthState } from '../features/auth/state'
-import { login } from '../shared/api/axios'
 
 export default function LoginPages() {
 	const [showPassword, setShowPassword] = useState(false)
@@ -22,10 +22,15 @@ export default function LoginPages() {
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		try {
-			const response = await login(data.email, data.password)
+			const response = await axios.post(
+				'https://full-stack-ai-6uq7.onrender.com/api/auth/login',
+				{
+					email: data.email,
+					password: data.password
+				}
+			)
 
-			// сохраняем токен
-			localStorage.setItem('token', response.token)
+			localStorage.setItem('token', response.data.token)
 
 			setAuth(true)
 
