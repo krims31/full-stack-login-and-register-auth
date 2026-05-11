@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import express, { type Request, type Response } from 'express'
 import jwt from 'jsonwebtoken'
 import OpenAI from 'openai'
-import { userStorage } from './shared/Database/userStorage'
+import { userStorage } from './../dist/shared/Database/userStorage'
 
 dotenv.config()
 
@@ -15,9 +15,9 @@ interface myToken extends jwt.JwtPayload {
 interface User {
 	id: number
 	email: string
-	username?: string
+	username: string
 	password: string
-	createdAt: Date
+	createdAt: string
 }
 
 const excludePassword = <T extends { password: string }>(
@@ -147,16 +147,6 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 	res.json({ reply: randomResponse })
 })
 
-const testPassword = bcrypt.hashSync('123456', 10)
-
-users.push({
-	id: userId++,
-	email: 'test@mail.ru',
-	username: 'test',
-	password: testPassword,
-	createdAt: new Date()
-})
-
 app.post('/api/auth/register', async (req: Request, res: Response) => {
 	const { email, password, username } = req.body
 
@@ -232,7 +222,7 @@ app.get('/api/auth/me', (req: Request, res: Response) => {
 
 	try {
 		const decoded = jwt.verify(token, 'secret') as myToken
-		const user = users.find(u => u.id === decoded.id)
+		const user = userStorage.getId(decoded.id.toString())
 
 		if (!user) {
 			return res.status(404).json({ message: 'User not found' })
@@ -245,7 +235,8 @@ app.get('/api/auth/me', (req: Request, res: Response) => {
 })
 
 app.get('/api/auth/users', (req: Request, res: Response) => {
-	const usersWithoutPassword = users.map(excludePassword)
+	const allUsers = userStorage.getAll()
+	const usersWithoutPassword = allUsers.map(excludePassword)
 	res.json(usersWithoutPassword)
 })
 
