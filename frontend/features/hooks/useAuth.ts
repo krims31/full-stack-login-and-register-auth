@@ -22,7 +22,11 @@ export default function useAuth() {
 			}
 			try {
 				console.log('Token found, verifying...')
-				const response = await api.get('/auth/me')
+				const response = await api.get('/auth/me', {
+					headers: {
+						Authorization: `Bearer ${token}`
+					}
+				})
 				console.log(
 					'📡 useAuth: Response received:',
 					response.status,
@@ -30,21 +34,21 @@ export default function useAuth() {
 				)
 
 				if (response.data) {
-					console.log('✅ useAuth: Token valid, user authenticated')
+					console.log(' useAuth: Token valid, user authenticated')
 					setAuth(true)
 
 					if (setUser) {
 						setUser(response.data)
 					}
 				} else {
-					console.log('❌ useAuth: No user data in response')
+					console.log(' useAuth: No user data in response')
 					setAuth(false)
 					setUser(null)
 					localStorage.removeItem('token')
 				}
 			} catch (error) {
-				console.error('❌ useAuth: Auth check failed:', error.message)
-				console.error('❌ useAuth: Error response:', error.response?.data)
+				console.error('useAuth: Auth check failed:', error.message)
+				console.error('useAuth: Error response:', error.response?.data)
 				setAuth(false)
 				setUser(null)
 				localStorage.removeItem('token')
