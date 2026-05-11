@@ -1,10 +1,5 @@
-import axios, { type InternalAxiosRequestConfig } from 'axios'
+import { type InternalAxiosRequestConfig } from 'axios'
 import { api } from './authApi'
-
-interface LoginResponse {
-	token: string
-	email: string
-}
 
 api.interceptors.request.use(
 	(config: InternalAxiosRequestConfig) => {
@@ -12,6 +7,7 @@ api.interceptors.request.use(
 
 		if (token && config.headers) {
 			config.headers.Authorization = `Bearer ${token}`
+			console.log('Token added to request headers', config.url)
 		}
 
 		return config
@@ -21,28 +17,15 @@ api.interceptors.request.use(
 	}
 )
 
-export async function login(
-	email: string,
-	password: string
-): Promise<LoginResponse> {
-	try {
-		const { data } = await api.post<LoginResponse>('/auth/login', {
-			email,
-			password
-		})
-
-		localStorage.setItem('token', data.token)
-
-		return data
-	} catch (error: unknown) {
-		if (axios.isAxiosError(error)) {
-			console.error(
-				'Error logging in:',
-				error.response?.data?.message || error.message
-			)
-		} else {
-			console.error('Unexpected error:', error)
+api.interceptors.request.use(
+	response => response,
+	error => {
+		if (error.response?.status === 401) {
+			localStorage.removeItem('token')
+			if (window.location.pathname !== '/login') {
+				window.location.href = '/login'
+			}
 		}
-		throw error
+		return Promise.reject(error)
 	}
-}
+)
