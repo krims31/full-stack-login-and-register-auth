@@ -147,6 +147,21 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 	res.json({ reply: randomResponse })
 })
 
+const initUser = () => {
+	const user = userStorage.getAll()
+	if (user.length === 0) {
+		const hashPassword = bcrypt.hashSync('123456', 10)
+		userStorage.save({
+			id: 1,
+			email: 'test@mail.ru',
+			username: 'test',
+			password: hashPassword,
+			createdAt: new Date().toISOString()
+		})
+		console.log('User created!')
+	}
+}
+
 app.post('/api/auth/register', async (req: Request, res: Response) => {
 	const { email, password, username } = req.body
 
@@ -248,4 +263,5 @@ app.all('/*splat', (req: Request, res: Response) => {
 
 app.listen(PORT, () => {
 	console.log('Server is running on http://localhost:5000')
+	initUser()
 })
