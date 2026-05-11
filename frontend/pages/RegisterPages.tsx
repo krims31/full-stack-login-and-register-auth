@@ -57,7 +57,7 @@ export default function RegisterPages() {
 								required: 'Username is required'
 							})}
 							placeholder="Username"
-							className={`w-full border p-3 pl-10 rounded-xl focus:outline-blue-500 ${
+							className={`w-full border p-3 pl-10 rounded-xl text-black focus:outline-blue-500 ${
 								errors.email ? 'border-red-500' : 'border-gray-300'
 							}`}
 						/>
@@ -81,7 +81,7 @@ export default function RegisterPages() {
 								required: 'Email is required'
 							})}
 							placeholder="Email"
-							className={`w-full border p-3 pl-10 rounded-xl focus:outline-blue-500 ${
+							className={`w-full border p-3 pl-10 rounded-xl text-black focus:outline-blue-500 ${
 								errors.email ? 'border-red-500' : 'border-gray-300'
 							}`}
 						/>
@@ -110,7 +110,7 @@ export default function RegisterPages() {
 							})}
 							type={showPassword ? 'text' : 'password'}
 							placeholder="Password"
-							className={`w-full border p-3 pl-10 pr-10 rounded-xl focus:outline-blue-500 ${
+							className={`w-full border p-3 pl-10 pr-10 rounded-xl text-black focus:outline-blue-500 ${
 								errors.password ? 'border-red-500' : 'border-gray-300'
 							}`}
 						/>
