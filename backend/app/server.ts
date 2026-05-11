@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import express, { type Request, type Response } from 'express'
 import jwt from 'jsonwebtoken'
 import OpenAI from 'openai'
-import { userStorage } from './../dist/shared/Database/userStorage'
+import { userStorage } from '../shared/Database/userStorage'
 
 dotenv.config()
 
