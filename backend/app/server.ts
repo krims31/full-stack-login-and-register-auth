@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import express, { type Request, type Response } from 'express'
 import jwt from 'jsonwebtoken'
 import OpenAI from 'openai'
+import { userStorage } from './shared/Database/userStorage'
 
 dotenv.config()
 
@@ -146,9 +147,6 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 	res.json({ reply: randomResponse })
 })
 
-const users: User[] = []
-let userId: number = 1
-
 const testPassword = bcrypt.hashSync('123456', 10)
 
 users.push({
@@ -166,7 +164,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
 		return res.status(400).json('Email and password are required')
 	}
 
-	const existingUser = users.find(user => user.email === email)
+	const existingUser = userStorage.getEmail(email)
 
 	if (existingUser) {
 		return res.status(400).json('User already exists')
@@ -174,15 +172,18 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
 
 	const hashedPassword = await bcrypt.hash(password, 10)
 
+	const allUsers = userStorage.getAll()
+	const newId = allUsers.length + 1
+
 	const newUser: User = {
-		id: userId++,
+		id: newId,
 		email,
 		username: username || email.split('@')[0],
 		password: hashedPassword,
-		createdAt: new Date()
+		createdAt: new Date().toISOString()
 	}
 
-	users.push(newUser)
+	userStorage.save(newUser)
 
 	res.status(201).json({
 		message: 'User registered successfully',
@@ -197,7 +198,7 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 		return res.status(400).json({ message: 'Email and password are required' })
 	}
 
-	const user = users.find(u => u.email === email)
+	const user = userStorage.getEmail(email)
 
 	if (!user) {
 		return res.status(400).json({ message: 'User not found' })
