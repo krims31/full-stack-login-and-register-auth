@@ -55,7 +55,10 @@ export default function Chat() {
 							value={text}
 							onChange={e => setText(e.target.value)}
 							onKeyDown={handleKeyPress}
-							className="w-full max-w-2xl h-32 px-8 pt-1 pb-20 border rounded-2xl placeholder:text-gray-600 transition-shadow border-black/10 shadow-lg hover:shadow-xl outline-0 text-black"
+							className="w-full max-w-2xl h-32 px-8 pt-1 pb-20 border rounded-2xl placeholder:text-gray-600 transition-shadow border-black/10 shadow-lg hover:shadow-xl outline-0 text-black focus:ring-2 focus:ring-purple-500 focus:border-transparent
+							firefox:focus:ring-purple-400
+							firefox:placeholder:opacity-60 
+							webkit:autofill:bg-yellow-50"
 							placeholder="Ask AI a question or make a request..."
 							disabled={isLoading}
 						/>
