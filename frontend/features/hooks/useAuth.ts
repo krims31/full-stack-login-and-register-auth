@@ -27,11 +27,6 @@ export default function useAuth() {
 						Authorization: `Bearer ${token}`
 					}
 				})
-				console.log(
-					'📡 useAuth: Response received:',
-					response.status,
-					response.data
-				)
 
 				if (response.data) {
 					console.log(' useAuth: Token valid, user authenticated')
@@ -47,8 +42,7 @@ export default function useAuth() {
 					localStorage.removeItem('token')
 				}
 			} catch (error) {
-				console.error('useAuth: Auth check failed:', error.message)
-				console.error('useAuth: Error response:', error.response?.data)
+				console.error('Error verifying token:', error)
 				setAuth(false)
 				setUser(null)
 				localStorage.removeItem('token')
