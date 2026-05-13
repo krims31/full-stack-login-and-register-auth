@@ -62,20 +62,20 @@ export default function UserMenu() {
 							<span className="absolute z-10 top-41 left-11">Community</span>
 						</button>
 
-						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
+						<button className="w-full text-left px-4 py-0 hover:bg-gray-100 rounded-lg">
 							<ThemeToggle />
-							<span className="absolute z-10 top-51 left-11">Theme</span>
 						</button>
 
 						<div>
 							<div className="h-0.5 bg-gray-300 shadow-sm border-t border-white"></div>
 						</div>
+
 						<button
 							className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg text-red-500"
 							onClick={handleLogin}
 						>
 							<LogOut className="flex item-center relative z-10 right-2" />
-							<span className="absolute z-10 top-60 left-11">Logout</span>
+							<span className="absolute z-10 top-61.5 left-11">Logout</span>
 						</button>
 					</div>
 				)}

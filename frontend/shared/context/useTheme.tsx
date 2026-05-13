@@ -7,11 +7,11 @@ export default function ThemeToggle() {
 	return (
 		<button
 			onClick={toggleTheme}
-			className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg relative flex items-center"
+			className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg  relative flex items-center"
 		>
-			<SunMoon className="relative z-10 mr-2" />
-			<span className="z-10">
-				Theme: {theme === 'light' ? 'Light' : 'Dark'}
+			<SunMoon className="relative z-10 mr-2 right-6" />
+			<span className="z-10 relative right-6">
+				{theme === 'light' ? 'Dark' : 'Light'}
 			</span>
 		</button>
 	)

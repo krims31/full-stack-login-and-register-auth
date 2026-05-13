@@ -14,7 +14,7 @@ export default function Ai() {
 	const { enabled, setEnabled, handleSend } = useAI()
 
 	return (
-		<div className="min-h-screen max-w-360 mx-auto px-4 firefox:overflow-x-hidden">
+		<div className="min-h-screen max-w-360 mx-auto px-4  firefox:overflow-x-hidden">
 			{/* HEADER */}
 			<header className="flex items-center justify-between px-4 xl:px-20 py-4 text-black">
 				<div className="flex items-center gap-4">

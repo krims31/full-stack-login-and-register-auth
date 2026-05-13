@@ -15,7 +15,7 @@ export default function Sidebar() {
 	const navigate = useNavigate()
 	return (
 		<>
-			<aside>
+			<aside className="dark:bg-gray-800 dark:border-gray-700">
 				<img
 					src="./ai-icon-circle-png.webp"
 					alt="ai"
