@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ThemeContext } from '../../features/hooks/useThemeContext'
-import { contextProps } from '../../shared/interface/contextProps'
-import { Theme } from '../../shared/type/Theme'
+import type { contextProps } from '../../shared/interface/contextProps'
+import type { Theme } from '../../shared/type/Theme'
 
 export const ThemeProvider: React.FC<contextProps> = ({ children }) => {
 	const [theme, setTheme] = useState<Theme>('light')

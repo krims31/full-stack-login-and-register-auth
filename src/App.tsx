@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ProtectedRoutes } from '../frontend/app/providers/routes/ProtectedRoutes'
+import { ThemeProvider } from '../frontend/app/providers/ThemeProvider'
 import useAuth from '../frontend/features/hooks/useAuth'
 import Ai from '../frontend/pages/AI'
 import LoginPages from '../frontend/pages/LoginPages'
@@ -21,99 +22,101 @@ function App() {
 
 	return (
 		<>
-			<BrowserRouter>
-				<Routes>
-					<Route
-						path="/login"
-						element={<LoginPages />}
-					/>
-					<Route
-						path="/register"
-						element={<RegisterPages />}
-					/>
-					<Route
-						path="/"
-						element={
-							<ProtectedRoutes>
-								<Ai />
-								<Sidebar />
-							</ProtectedRoutes>
-						}
-					/>
+			<ThemeProvider>
+				<BrowserRouter>
+					<Routes>
+						<Route
+							path="/login"
+							element={<LoginPages />}
+						/>
+						<Route
+							path="/register"
+							element={<RegisterPages />}
+						/>
+						<Route
+							path="/"
+							element={
+								<ProtectedRoutes>
+									<Ai />
+									<Sidebar />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/chat"
-						element={
-							<ProtectedRoutes>
-								<Chat />
-							</ProtectedRoutes>
-						}
-					/>
+						<Route
+							path="/chat"
+							element={
+								<ProtectedRoutes>
+									<Chat />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/history"
-						element={
-							<ProtectedRoutes>
-								<History />
-							</ProtectedRoutes>
-						}
-					/>
+						<Route
+							path="/history"
+							element={
+								<ProtectedRoutes>
+									<History />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/bot"
-						element={
-							<ProtectedRoutes>
-								<Bot />
-							</ProtectedRoutes>
-						}
-					/>
+						<Route
+							path="/bot"
+							element={
+								<ProtectedRoutes>
+									<Bot />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/folder"
-						element={
-							<ProtectedRoutes>
-								<Folder />
-							</ProtectedRoutes>
-						}
-					/>
+						<Route
+							path="/folder"
+							element={
+								<ProtectedRoutes>
+									<Folder />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/git"
-						element={
-							<ProtectedRoutes>
-								<Git />
-							</ProtectedRoutes>
-						}
-					/>
+						<Route
+							path="/git"
+							element={
+								<ProtectedRoutes>
+									<Git />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/database"
-						element={
-							<ProtectedRoutes>
-								<Database />
-							</ProtectedRoutes>
-						}
-					/>
+						<Route
+							path="/database"
+							element={
+								<ProtectedRoutes>
+									<Database />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/headphones"
-						element={
-							<ProtectedRoutes>
-								<Headphones />
-							</ProtectedRoutes>
-						}
-					/>
+						<Route
+							path="/headphones"
+							element={
+								<ProtectedRoutes>
+									<Headphones />
+								</ProtectedRoutes>
+							}
+						/>
 
-					<Route
-						path="/settings"
-						element={
-							<ProtectedRoutes>
-								<Settings />
-							</ProtectedRoutes>
-						}
-					/>
-				</Routes>
-			</BrowserRouter>
+						<Route
+							path="/settings"
+							element={
+								<ProtectedRoutes>
+									<Settings />
+								</ProtectedRoutes>
+							}
+						/>
+					</Routes>
+				</BrowserRouter>
+			</ThemeProvider>
 		</>
 	)
 }

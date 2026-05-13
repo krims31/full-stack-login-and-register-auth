@@ -5,10 +5,10 @@ import {
 	MessageCircleMore,
 	Podcast,
 	Settings,
-	SunMoon,
 	UserRound
 } from 'lucide-react'
 import useUserMenu from '../../../features/hooks/useUserMenu'
+import ThemeToggle from '../../context/useTheme'
 export default function UserMenu() {
 	const { isOpen, handleLogin, ref, setIsOpen } = useUserMenu()
 
@@ -63,7 +63,7 @@ export default function UserMenu() {
 						</button>
 
 						<button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg">
-							<SunMoon className="flex item-center relative z-10 right-2" />
+							<ThemeToggle />
 							<span className="absolute z-10 top-51 left-11">Theme</span>
 						</button>
 

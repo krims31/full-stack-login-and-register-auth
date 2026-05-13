@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { ThemeContextProps } from '../../shared/interface/ThemeContextProps'
+import type { ThemeContextProps } from '../../shared/interface/ThemeContextProps'
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>(
 	undefined
