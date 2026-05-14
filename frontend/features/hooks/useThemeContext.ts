@@ -6,6 +6,7 @@ export const ThemeContext = createContext<ThemeContextProps | undefined>(
 )
 
 export const useTheme = () => {
+
 	const context = useContext(ThemeContext)
 
 	if (!context) {

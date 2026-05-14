@@ -4,16 +4,26 @@ import type { contextProps } from '../../shared/interface/contextProps'
 import type { Theme } from '../../shared/type/Theme'
 
 export const ThemeProvider: React.FC<contextProps> = ({ children }) => {
-	const [theme, setTheme] = useState<Theme>('light')
+	const [theme, setTheme] = useState<Theme>(() => {
+		if (typeof window !== 'undefined') {
+			const savedTheme = localStorage.getItem('theme') as Theme
+			return savedTheme || 'light'
+		}
+		return 'light'
+	})
 
 	useEffect(() => {
 		const root = document.documentElement
 
-		if (theme === 'light') {
-			return root.classList.add('dark')
+		if (theme === 'dark') {
+			root.classList.add('dark')
+			console.log('Dark mode enabled, classlist: ', root.classList)
 		} else {
-			return root.classList.remove('dark')
+			root.classList.remove('dark')
+			console.log('Light mode enabled, classlist: ', root.classList)
 		}
+
+		localStorage.setItem('theme', theme)
 	}, [theme])
 
 	const toggleTheme = () => {
