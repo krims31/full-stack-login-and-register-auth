@@ -23,7 +23,7 @@ export default function Chat() {
 			<header className="flex items-center justify-between px-4 xl:px-20 py-4 text-black">
 				<div className="flex items-center gap-4">
 					<select
-						className="border rounded-md px-6 py-1 transition-shadow
+						className="border rounded-md px-6 relative left-30 py-1 transition-shadow
              border-black/10 shadow-lg hover:shadow-xl outline-0"
 					>
 						<option>ChatGPT 4o</option>
@@ -36,7 +36,7 @@ export default function Chat() {
 					<img
 						src="./ai.png"
 						alt="ai"
-						className="w-4 max-[1280px]:ml-0 xl:-ml-40"
+						className="w-4 max-[1280px]:ml-0 xl:-ml-10"
 					/>
 				</div>
 
